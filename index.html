@@ -32,7 +32,8 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;pointer-events:none;z
 .bsave:hover{background:var(--warm2)}
 
 /* ─── FAB ─── */
-#fab{position:fixed;bottom:20px;right:20px;z-index:8999;background:#1a1208;color:#f0ebe3;border:none;border-radius:50px;padding:11px 18px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.28);transition:all .28s;display:flex;align-items:center;gap:7px}
+#fab{position:fixed;bottom:20px;right:20px;z-index:8999;background:#1a1208;color:#f0ebe3;border:none;border-radius:50px;padding:11px 18px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.28);transition:all .28s;display:none;align-items:center;gap:7px}
+#fab.unlocked{display:flex}
 #fab:hover{background:var(--warm);transform:scale(1.04)}
 #fab svg{width:13px;height:13px;fill:currentColor}
 body.ed #page-wrap{padding-top:50px}
@@ -558,6 +559,13 @@ body.ed .add-photo{display:block}
 </div>
 
 <script>
+// ══════════════════════════════════════
+//  ACCÈS ADMIN
+// ══════════════════════════════════════
+const SECRET = 'pageLink@75';
+const isAdmin = new URLSearchParams(window.location.search).get('edit') === SECRET;
+if(isAdmin) document.getElementById('fab').classList.add('unlocked');
+
 // ══════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════
