@@ -108,17 +108,23 @@ body.ed .av-out:hover .av-hint{display:flex}
 .hbio{font-size:13px;color:var(--muted);max-width:400px;line-height:1.8;opacity:0;animation:fu .8s ease forwards .6s;margin-bottom:56px}
 
 /* ─── CHAPTER BUTTONS ─── */
-.chs{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;width:100%;max-width:700px;opacity:0;animation:fu .8s ease forwards .75s}
-.ch{flex:1;min-width:240px;max-width:320px;position:relative;overflow:hidden;border-radius:10px;cursor:pointer;border:1px solid var(--border);background:var(--white);padding:30px 24px;text-align:left;transition:all .3s;user-select:none}
-.ch:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(42,32,23,.12);border-color:var(--warm)}
-.ch-ico{font-size:26px;margin-bottom:12px;display:block}
-.ch-num{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--warm);margin-bottom:6px;display:block}
-.ch-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--text);line-height:1.2;margin-bottom:8px;display:block;min-height:1.2em}
-.ch-title em{font-style:italic;color:var(--warm)}
-.ch-desc{font-size:12px;color:var(--muted);line-height:1.6;display:block;margin-bottom:16px;min-height:1em}
-.ch-arrow{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);transition:gap .25s}
-.ch:hover .ch-arrow{gap:12px}
-.ch-arrow svg{width:13px;height:13px;fill:none;stroke:var(--warm);stroke-width:2}
+.chs{display:flex;flex-direction:column;gap:12px;width:100%;max-width:560px;opacity:0;animation:fu .8s ease forwards .75s}
+.ch{width:100%;position:relative;overflow:hidden;border-radius:14px;cursor:pointer;border:1px solid var(--border);background:var(--white);padding:14px 16px;display:flex;align-items:center;gap:14px;transition:all .28s;user-select:none}
+.ch:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(42,32,23,.1);border-color:var(--warm)}
+.ch-thumb{width:56px;height:56px;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);flex-shrink:0;position:relative;cursor:pointer}
+.ch-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ch-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.ch-thumb-ov{display:none;position:absolute;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-radius:10px}
+body.ed .ch-thumb:hover .ch-thumb-ov{display:flex}
+.ch-ico{display:none}
+.ch-num{display:none}
+.ch-content{flex:1;min-width:0}
+.ch-title{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;color:var(--text);line-height:1.2;display:block;margin-bottom:2px}
+.ch-title em{font-style:normal;color:var(--text)}
+.ch-desc{font-size:12px;color:var(--muted);line-height:1.4;display:block}
+.ch-arrow{display:flex;align-items:center;flex-shrink:0;color:var(--warm);transition:transform .25s}
+.ch:hover .ch-arrow{transform:translateX(4px)}
+.ch-arrow svg{width:16px;height:16px;fill:none;stroke:var(--warm);stroke-width:2}
 
 /* edit overlay on buttons */
 .ch-edit-bar{display:none;position:absolute;top:8px;right:8px;gap:4px}
@@ -393,22 +399,32 @@ body.ed .add-photo{display:block}
       <div class="ch-edit-bar">
         <button class="ch-edit-btn" onclick="event.stopPropagation();editChapter(0)" title="Modifier">✏️</button>
       </div>
-      <span class="ch-ico" id="ch-ico-0">🚀</span>
-      <span class="ch-num">Rubrique 01</span>
-      <span class="ch-title e" id="ch-title-0" contenteditable="false">Parcours<br><em>Entrepreneurial</em></span>
-      <span class="ch-desc e" id="ch-desc-0" contenteditable="false">Projets, vision business, ce que j'ai construit.</span>
-      <span class="ch-arrow">Découvrir <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      <div class="ch-thumb" id="ch-thumb-0" onclick="event.stopPropagation();clickThumb(0)">
+        <div class="ch-thumb-ph" id="ch-thumb-ph-0">🚀</div>
+        <div class="ch-thumb-ov">Photo</div>
+        <input type="file" id="ch-thumb-in-0" accept="image/*" style="display:none" onchange="loadThumb(this,0)"/>
+      </div>
+      <div class="ch-content">
+        <span class="ch-title e" id="ch-title-0" contenteditable="false">Parcours Entrepreneurial</span>
+        <span class="ch-desc e" id="ch-desc-0" contenteditable="false">Projets, vision business, ce que je construis.</span>
+      </div>
+      <span class="ch-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
 
     <div class="ch" id="ch-1" onclick="openPanel('p1')">
       <div class="ch-edit-bar">
         <button class="ch-edit-btn" onclick="event.stopPropagation();editChapter(1)" title="Modifier">✏️</button>
       </div>
-      <span class="ch-ico" id="ch-ico-1">🏃</span>
-      <span class="ch-num">Rubrique 02</span>
-      <span class="ch-title e" id="ch-title-1" contenteditable="false">Sport &amp;<br><em>Discipline</em></span>
-      <span class="ch-desc e" id="ch-desc-1" contenteditable="false">Mon quotidien sportif, mes performances, ma philosophie.</span>
-      <span class="ch-arrow">Découvrir <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      <div class="ch-thumb" id="ch-thumb-1" onclick="event.stopPropagation();clickThumb(1)">
+        <div class="ch-thumb-ph" id="ch-thumb-ph-1">🏃</div>
+        <div class="ch-thumb-ov">Photo</div>
+        <input type="file" id="ch-thumb-in-1" accept="image/*" style="display:none" onchange="loadThumb(this,1)"/>
+      </div>
+      <div class="ch-content">
+        <span class="ch-title e" id="ch-title-1" contenteditable="false">Corps &amp; Mental</span>
+        <span class="ch-desc e" id="ch-desc-1" contenteditable="false">Sport, discipline et philosophie au quotidien.</span>
+      </div>
+      <span class="ch-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
 
   </div>
@@ -598,14 +614,28 @@ function closePanel(id){
 }
 
 // ══════════════════════════════════════
-//  CHAPTER EDIT (emoji + couleur bouton)
+//  CHAPTER THUMB
 // ══════════════════════════════════════
+function clickThumb(idx){
+  if(!editMode) return;
+  document.getElementById('ch-thumb-in-'+idx).click();
+}
+function loadThumb(input, idx){
+  if(!input.files[0]) return;
+  const r = new FileReader();
+  r.onload = e => {
+    const ph = document.getElementById('ch-thumb-ph-'+idx);
+    if(ph) ph.outerHTML = `<img src="${e.target.result}" alt="thumb" style="width:100%;height:100%;object-fit:cover;border-radius:10px"/>`;
+    localStorage.setItem('ch-thumb-'+idx, e.target.result);
+  };
+  r.readAsDataURL(input.files[0]);
+}
 function editChapter(idx){
-  const ico = document.getElementById('ch-ico-'+idx);
-  const ch = document.getElementById('ch-'+idx);
-  const newIco = prompt('Emoji de la rubrique :', ico.textContent);
-  if(newIco !== null) ico.textContent = newIco;
-  localStorage.setItem('ch-ico-'+idx, ico.textContent);
+  const ph = document.getElementById('ch-thumb-ph-'+idx);
+  if(ph){
+    const newIco = prompt('Emoji :', ph.textContent);
+    if(newIco !== null){ ph.textContent = newIco; localStorage.setItem('ch-ico-'+idx, newIco); }
+  }
 }
 
 // ══════════════════════════════════════
@@ -844,8 +874,13 @@ function loadAll(){
     const sth=localStorage.getItem('st_html_'+n); if(sth){ const st=document.getElementById('st-'+n); if(st) st.innerHTML=sth; }
     const pgh=localStorage.getItem('pg_html_'+n); if(pgh){ const pg=document.getElementById('pg-'+n); if(pg){ pg.innerHTML=pgh; photoCounters['pg-'+n]=(pg.querySelectorAll('.pgc').length); } }
   });
-  // button icons
-  ['0','1'].forEach(n=>{ const v=localStorage.getItem('ch-ico-'+n); if(v){ const ico=document.getElementById('ch-ico-'+n); if(ico) ico.textContent=v; } });
+  // button thumbs
+  ['0','1'].forEach(n=>{
+    const t=localStorage.getItem('ch-thumb-'+n);
+    if(t){ const ph=document.getElementById('ch-thumb-ph-'+n); if(ph) ph.outerHTML=`<img src="${t}" alt="thumb" style="width:100%;height:100%;object-fit:cover;border-radius:10px"/>`; }
+    const ico=localStorage.getItem('ch-ico-'+n);
+    if(ico){ const ph=document.getElementById('ch-thumb-ph-'+n); if(ph && ph.tagName!=='IMG') ph.textContent=ico; }
+  });
   // bg
   const bg=localStorage.getItem('bg');
   if(bg){ document.getElementById('page-bg').style.background=bg; document.body.style.background='transparent'; document.querySelectorAll('.pbg').forEach(pb=>pb.style.background=bg); }
