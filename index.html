@@ -6,796 +6,769 @@
 <title>Matteo.czt</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&family=Raleway:wght@200;300;400;500&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #f0ebe3;
-  --bg2: #e8e0d4;
-  --warm: #8a6d4e;
-  --warm-light: #6b5040;
-  --sand: #c4a882;
-  --text: #2a2017;
-  --muted: #9a8878;
-  --surface: rgba(138,109,78,0.07);
-  --border: rgba(138,109,78,0.2);
-  --white: #faf7f3;
-}
+:root{--bg:#f0ebe3;--bg2:#e8e0d4;--warm:#8a6d4e;--warm2:#6b5040;--sand:#c4a882;--text:#2a2017;--muted:#9a8878;--border:rgba(138,109,78,0.2);--white:#faf7f3}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
-
-/* ===== EDIT BAR ===== */
-#edit-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1e1810;color:#f0ebe3;display:flex;align-items:center;gap:0;padding:0 14px;height:52px;font-family:'DM Sans',sans-serif;font-size:12px;box-shadow:0 2px 20px rgba(0,0,0,0.35);transform:translateY(-100%);transition:transform 0.3s ease;overflow-x:auto;overflow-y:hidden;white-space:nowrap}
-#edit-bar.visible{transform:translateY(0)}
-#edit-bar::-webkit-scrollbar{height:3px}
-#edit-bar::-webkit-scrollbar-track{background:rgba(255,255,255,0.05)}
-#edit-bar::-webkit-scrollbar-thumb{background:var(--warm);border-radius:3px}
-.eb-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--sand);margin-right:16px;flex-shrink:0}
-.eb-sep{width:1px;height:28px;background:rgba(255,255,255,0.1);margin:0 10px;flex-shrink:0}
-.eb-group{display:flex;align-items:center;gap:5px;flex-shrink:0}
-.eb-lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,227,.45);margin-right:3px}
-.eb-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#f0ebe3;border-radius:4px;padding:5px 9px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;letter-spacing:.05em;transition:all .2s;flex-shrink:0}
-.eb-btn:hover{background:rgba(255,255,255,.15);border-color:var(--sand)}
-.eb-btn.active{background:var(--warm);border-color:var(--warm)}
-.eb-save{margin-left:16px;background:var(--warm);border:1px solid var(--warm);color:#fff;border-radius:4px;padding:6px 14px;font-size:11px;cursor:pointer;font-weight:500;letter-spacing:.08em;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap;flex-shrink:0}
-.eb-save:hover{background:var(--warm-light)}
-
-/* Toggle btn */
-#toggle-edit{position:fixed;bottom:24px;right:24px;z-index:9998;background:#1e1810;color:#f0ebe3;border:none;border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.25);transition:all .3s;display:flex;align-items:center;gap:8px}
-#toggle-edit:hover{background:var(--warm);transform:scale(1.04)}
-#toggle-edit svg{width:14px;height:14px;fill:currentColor}
-body.edit-mode #page-wrap{padding-top:52px}
-
-/* Editable */
-.editable{position:relative;cursor:text;outline:none;transition:box-shadow .2s}
-body.edit-mode .editable:hover{box-shadow:0 0 0 2px rgba(138,109,78,.35);border-radius:3px}
-body.edit-mode .editable:focus{box-shadow:0 0 0 2px var(--warm);border-radius:3px}
-
-/* ===== PAGE ===== */
-#page-wrap{position:relative;z-index:1;transition:padding-top .3s}
 #page-bg{position:fixed;inset:0;z-index:-1;transition:background .4s}
+body::before{content:'';position:fixed;inset:0;opacity:.03;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-/* ===== HERO ===== */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative}
-.hero-tag{font-size:11px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:36px;opacity:0;animation:fadeUp .8s ease forwards .1s}
-.avatar-outer{position:relative;width:144px;height:144px;margin:0 auto 40px;opacity:0;animation:fadeUp .9s ease forwards .2s;cursor:pointer}
-.avatar-ring{position:absolute;inset:-8px;border-radius:50%;border:1px solid var(--border);animation:spin 10s linear infinite;pointer-events:none}
-.avatar-ring::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--warm);box-shadow:0 0 8px var(--warm)}
+/* TOOLBAR */
+#bar{position:fixed;top:0;left:0;right:0;z-index:9000;height:50px;background:#1a1208;display:flex;align-items:center;padding:0 12px;gap:6px;transform:translateY(-100%);transition:transform .3s;overflow-x:auto;overflow-y:hidden;white-space:nowrap;box-shadow:0 2px 16px rgba(0,0,0,.4)}
+#bar.on{transform:translateY(0)}
+#bar::-webkit-scrollbar{height:2px}
+#bar::-webkit-scrollbar-thumb{background:var(--warm)}
+.bl{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--sand);margin-right:10px;flex-shrink:0}
+.bsep{width:1px;height:26px;background:rgba(255,255,255,.1);margin:0 6px;flex-shrink:0}
+.bgrp{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.blbl{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,235,227,.4);margin-right:2px}
+.bb{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#f0ebe3;border-radius:4px;padding:4px 8px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;flex-shrink:0}
+.bb:hover{background:rgba(255,255,255,.16);border-color:var(--sand)}
+.bsave{margin-left:auto;background:var(--warm);border:1px solid var(--warm);color:#fff;border-radius:4px;padding:5px 14px;font-size:11px;cursor:pointer;font-weight:500;font-family:'DM Sans',sans-serif;transition:all .2s;flex-shrink:0;white-space:nowrap}
+.bsave:hover{background:var(--warm2)}
+.bexp{background:#5a6a8a;border:1px solid #5a6a8a;color:#fff;border-radius:4px;padding:5px 14px;font-size:11px;cursor:pointer;font-weight:500;font-family:'DM Sans',sans-serif;transition:all .2s;flex-shrink:0;white-space:nowrap;margin-left:6px}
+.bexp:hover{background:#4a5a7a}
+
+/* FAB */
+#fab{position:fixed;bottom:20px;right:20px;z-index:8999;background:#1a1208;color:#f0ebe3;border:none;border-radius:50px;padding:11px 18px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.28);transition:all .28s;display:none;align-items:center;gap:7px}
+#fab.unlocked{display:flex}
+#fab:hover{background:var(--warm);transform:scale(1.04)}
+#fab svg{width:13px;height:13px;fill:currentColor}
+body.ed #page-wrap{padding-top:50px}
+
+/* EDITABLE */
+.e{outline:none;transition:box-shadow .18s}
+body.ed .e:hover{box-shadow:0 0 0 2px rgba(138,109,78,.3);border-radius:3px;cursor:text}
+body.ed .e:focus{box-shadow:0 0 0 2px var(--warm);border-radius:3px}
+
+/* POPUP */
+.pop{display:none;position:fixed;z-index:9100;background:#1a1208;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px;box-shadow:0 8px 40px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;max-height:80vh;overflow-y:auto}
+.pop.on{display:block}
+.pop h4{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);margin-bottom:12px}
+.px{position:absolute;top:9px;right:11px;background:none;border:none;color:rgba(240,235,227,.4);font-size:15px;cursor:pointer}
+.px:hover{color:#f0ebe3}
+.ptabs{display:flex;gap:3px;margin-bottom:12px}
+.pt{flex:1;padding:5px;border:1px solid rgba(255,255,255,.1);border-radius:5px;background:none;color:rgba(240,235,227,.5);font-size:9px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s}
+.pt.on{background:var(--warm);border-color:var(--warm);color:#fff}
+.tp{display:none}.tp.on{display:block}
+.fo{padding:9px 10px;border-radius:5px;cursor:pointer;color:#f0ebe3;font-size:14px;transition:background .18s;display:flex;justify-content:space-between;align-items:center}
+.fo:hover{background:rgba(255,255,255,.08)}.fo.on{background:var(--warm)}
+.fo small{font-size:9px;opacity:.45;font-family:'DM Sans',sans-serif}
+.sr{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sr label{font-size:10px;color:rgba(240,235,227,.65);width:54px}
+.sr input[type=range]{flex:1;accent-color:var(--warm);-webkit-appearance:none;height:2px;background:rgba(255,255,255,.15);border-radius:2px;outline:none}
+.sr input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--warm);cursor:pointer}
+.sv{font-size:10px;color:var(--sand);width:26px;text-align:right}
+.sw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px}
+.sw{height:30px;border-radius:5px;cursor:pointer;border:2px solid transparent;transition:border-color .18s}
+.sw:hover,.sw.on{border-color:#fff}
+.swdot{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .18s;flex-shrink:0}
+.swdot:hover{border-color:#fff}
+.swrow{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.inp-color{width:36px;height:28px;border:none;border-radius:4px;cursor:pointer;padding:0;background:none}
+.row2{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.row2 label{font-size:10px;color:rgba(240,235,227,.6);min-width:60px}
+.apbtn{width:100%;background:var(--warm);border:none;color:#fff;border-radius:5px;padding:7px;font-size:10px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .18s;margin-top:4px}
+.apbtn:hover{background:var(--warm2)}
+.apbtn2{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#f0ebe3;border-radius:5px;padding:7px;font-size:10px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px}
+.grad-prev{height:34px;border-radius:5px;margin-bottom:8px}
+.drow{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.drow label{font-size:10px;color:rgba(240,235,227,.6);width:62px;flex-shrink:0}
+.drow input[type=color]{width:30px;height:24px;border:none;border-radius:3px;cursor:pointer;padding:0}
+.drow select{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#f0ebe3;border-radius:4px;padding:3px 5px;font-size:10px;font-family:'DM Sans',sans-serif}
+
+/* PAGE */
+#page-wrap{position:relative;z-index:1;transition:padding-top .3s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 20px 100px;position:relative}
+.htag{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:32px;opacity:0;animation:fu .8s ease forwards .1s}
+.av-out{position:relative;width:130px;height:130px;margin:0 auto 36px;cursor:pointer;opacity:0;animation:fu .8s ease forwards .2s}
+.av-ring{position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--border);animation:spin 10s linear infinite;pointer-events:none}
+.av-ring::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--warm);box-shadow:0 0 7px var(--warm)}
 @keyframes spin{to{transform:rotate(360deg)}}
-.avatar-img{width:144px;height:144px;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--border)}
-.avatar-placeholder{width:144px;height:144px;border-radius:50%;background:var(--bg2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--warm);font-weight:300}
-.avatar-edit-hint{display:none;position:absolute;inset:0;border-radius:50%;background:rgba(42,32,23,.55);align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#fff;font-size:11px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
-body.edit-mode .avatar-outer:hover .avatar-edit-hint{display:flex}
-.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,11vw,96px);font-weight:300;line-height:1;color:var(--text);opacity:0;animation:fadeUp .9s ease forwards .3s;margin-bottom:4px}
-.hero-name em{font-style:italic;color:var(--warm)}
-.hero-handle{font-size:13px;color:var(--muted);letter-spacing:.12em;margin-bottom:28px;opacity:0;animation:fadeUp .9s ease forwards .4s}
-.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3.5vw,26px);font-style:italic;font-weight:300;color:var(--warm-light);max-width:500px;line-height:1.6;opacity:0;animation:fadeUp .9s ease forwards .5s;margin-bottom:52px}
-.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s ease forwards 1.1s;pointer-events:none}
-.scroll-hint span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-.scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--warm),transparent);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.av-img{width:130px;height:130px;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--border)}
+.av-ph{width:130px;height:130px;border-radius:50%;background:var(--bg2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--warm);font-weight:300}
+.av-hint{display:none;position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.5);align-items:center;justify-content:center;flex-direction:column;gap:3px;color:#fff;font-size:10px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+body.ed .av-out:hover .av-hint{display:flex}
+.hname{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,10vw,90px);font-weight:300;line-height:1;color:var(--text);opacity:0;animation:fu .8s ease forwards .3s;margin-bottom:4px}
+.hname em{font-style:italic;color:var(--warm)}
+.hhandle{font-size:12px;color:var(--muted);letter-spacing:.12em;margin-bottom:20px;opacity:0;animation:fu .8s ease forwards .4s}
+.hline{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,22px);font-style:italic;font-weight:300;color:var(--warm2);max-width:460px;line-height:1.65;opacity:0;animation:fu .8s ease forwards .5s;margin-bottom:12px}
+.hbio{font-size:13px;color:var(--muted);max-width:400px;line-height:1.8;opacity:0;animation:fu .8s ease forwards .6s;margin-bottom:56px}
 
-/* Divider */
-.divider{display:flex;align-items:center;gap:16px;padding:0 24px;max-width:840px;margin:0 auto;position:relative;z-index:1}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
-.divider span{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);white-space:nowrap}
+/* CHAPTER BUTTONS — style Linktree */
+.chs{display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px;opacity:0;animation:fu .8s ease forwards .75s}
+.ch{width:100%;position:relative;border-radius:14px;cursor:pointer;border:1px solid var(--border);background:var(--white);padding:14px 16px;display:flex;align-items:center;gap:14px;transition:all .28s;user-select:none}
+.ch:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(42,32,23,.1);border-color:var(--warm)}
+.ch-thumb{width:56px;height:56px;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);flex-shrink:0;position:relative}
+.ch-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ch-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.ch-thumb-ov{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;font-size:9px;color:#fff;border-radius:10px;text-transform:uppercase;letter-spacing:.1em}
+body.ed .ch-thumb:hover .ch-thumb-ov{display:flex}
+.ch-content{flex:1;min-width:0;text-align:left}
+.ch-title{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;color:var(--text);display:block;margin-bottom:3px}
+.ch-desc{font-size:12px;color:var(--muted);line-height:1.4;display:block}
+.ch-arrow{flex-shrink:0;color:var(--warm);transition:transform .25s}
+.ch:hover .ch-arrow{transform:translateX(4px)}
+.ch-arrow svg{width:16px;height:16px;fill:none;stroke:var(--warm);stroke-width:2}
+.ch-edit-bar{display:none;position:absolute;top:6px;right:6px}
+body.ed .ch-edit-bar{display:flex}
+.ch-edit-btn{background:#1a1208;border:none;color:#f0ebe3;border-radius:4px;padding:3px 7px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.ch-edit-btn:hover{background:var(--warm)}
 
-/* Sections */
-section{position:relative;z-index:1;padding:80px 24px}
-.container{max-width:780px;margin:0 auto}
-.sec-label{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:28px;display:flex;align-items:center;gap:12px}
-.sec-label::after{content:'';width:28px;height:1px;background:var(--warm)}
+/* PANEL */
+.panel{position:fixed;inset:0;z-index:7000;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .42s cubic-bezier(.4,0,.2,1);background:var(--bg)}
+.panel.on{transform:translateX(0)}
+.pbg{position:absolute;inset:0;z-index:0;background:var(--bg)}
+.pscroll{position:relative;z-index:1;overflow-y:auto;height:100%;-webkit-overflow-scrolling:touch}
+.pscroll::-webkit-scrollbar{width:3px}
+.pscroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.phdr{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);background:rgba(240,235,227,.7)}
+.pback{display:flex;align-items:center;gap:7px;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);transition:gap .22s;padding:0}
+.pback:hover{gap:11px}
+.pback svg{width:15px;height:15px;fill:none;stroke:var(--warm);stroke-width:2}
+.phdrtitle{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:var(--text)}
+.phero{padding:64px 22px 48px;text-align:center;max-width:680px;margin:0 auto}
+.phlabel{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:16px;display:block}
+.phtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:20px}
+.phtitle em{font-style:italic;color:var(--warm)}
+.phintro{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.8vw,22px);font-style:italic;font-weight:300;color:var(--warm2);line-height:1.65;max-width:500px;margin:0 auto}
+.psec{padding:40px 22px;max-width:740px;margin:0 auto;border-top:1px solid var(--border)}
+.pslabel{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.pslabel::after{content:'';width:24px;height:1px;background:var(--warm)}
 
-/* Bio */
-.bio-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3.2vw,28px);font-weight:300;line-height:1.75;color:var(--text)}
-.bio-text p+p{margin-top:1.2em}
-.bio-text strong{color:var(--warm);font-weight:400}
+/* TIMELINE */
+.tl{position:relative;padding-left:28px}
+.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,var(--warm),transparent)}
+.tli{position:relative;margin-bottom:36px}
+.tli::before{content:'';position:absolute;left:-24px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--warm);border:2px solid var(--white);box-shadow:0 0 0 2px var(--warm)}
+.tli-date{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--warm);margin-bottom:5px;display:block}
+.tli-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--text);margin-bottom:7px}
+.tli-body{font-size:13px;color:var(--muted);line-height:1.7}
+.tli-del{display:none;position:absolute;right:0;top:0;background:none;border:1px solid var(--border);color:var(--muted);border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif}
+body.ed .tli-del{display:block}
+.tli-del:hover{background:#c47a7a;border-color:#c47a7a;color:#fff}
+.add-tli{display:none;margin-top:16px}
+body.ed .add-tli{display:block}
+.add-tli button{background:none;border:1px dashed var(--border);color:var(--warm);padding:7px 16px;border-radius:5px;font-size:11px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif}
+.add-tli button:hover{border-color:var(--warm)}
 
-/* Gallery */
-.gallery-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;margin-top:32px}
-.g-cell{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:relative;cursor:pointer}
-.g-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.88);transition:transform .5s ease,filter .4s}
-.g-cell:hover img{transform:scale(1.04);filter:saturate(1)}
-.g-cell:nth-child(1){grid-column:span 7;aspect-ratio:4/3}
-.g-cell:nth-child(2){grid-column:span 5;aspect-ratio:3/4}
-.g-cell:nth-child(3){grid-column:span 5;aspect-ratio:3/4}
-.g-cell:nth-child(4){grid-column:span 7;aspect-ratio:4/3}
-.g-cell:nth-child(5){grid-column:span 12;aspect-ratio:21/6}
-.g-placeholder{width:100%;height:100%;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted)}
-.g-placeholder svg{width:26px;height:26px;stroke:var(--muted);fill:none;stroke-width:1.2}
-.g-placeholder span{font-size:10px;letter-spacing:.15em;text-transform:uppercase}
-.photo-edit-overlay{display:none;position:absolute;inset:0;background:rgba(42,32,23,.55);align-items:center;justify-content:center;flex-direction:column;gap:6px;color:#fff;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-body.edit-mode .g-cell:hover .photo-edit-overlay{display:flex}
+/* RICH TEXT */
+.rt{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.8vw,23px);font-weight:300;line-height:1.75;color:var(--text)}
+.rt p+p{margin-top:1em}
+.rt strong{color:var(--warm);font-weight:400}
 
-/* Stats */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:32px}
-.stat-item{background:var(--white);padding:32px 20px;text-align:center;transition:background .3s}
-.stat-item:hover{background:var(--bg2)}
-.stat-number{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--warm);line-height:1;display:block}
-.stat-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:8px;display:block}
+/* STATS */
+.pstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:8px}
+.pst{background:var(--white);padding:26px 14px;text-align:center;position:relative}
+.pst:hover{background:var(--bg2)}
+.psn{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--warm);line-height:1;display:block}
+.psl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px;display:block}
+.pst-del{display:none;position:absolute;top:5px;right:5px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;padding:2px 4px}
+body.ed .pst-del{display:block}
+.pst-del:hover{color:#c47a7a}
+.add-stat{display:none;margin-top:10px}
+body.ed .add-stat{display:block}
+.add-stat button{background:none;border:1px dashed var(--border);color:var(--warm);padding:7px 16px;border-radius:5px;font-size:11px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif}
+.add-stat button:hover{border-color:var(--warm)}
 
-/* Tags */
-.tags-wrap{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.tag{padding:8px 18px;border:1px solid var(--border);border-radius:999px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm-light);background:var(--white);transition:all .25s;cursor:default}
-.tag:hover{background:var(--bg2);border-color:var(--warm)}
+/* GALLERY */
+.pgal{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.pgc{aspect-ratio:1;border-radius:5px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);position:relative;cursor:pointer}
+.pgc img{width:100%;height:100%;object-fit:cover;filter:saturate(.88);transition:transform .4s,filter .3s}
+.pgc:hover img{transform:scale(1.05);filter:saturate(1)}
+.pgph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--muted)}
+.pgph svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:1.2}
+.pgph span{font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.pgov{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;color:#fff;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+body.ed .pgc:hover .pgov{display:flex}
+.add-photo{display:none;margin-top:8px}
+body.ed .add-photo{display:block}
+.add-photo button{background:none;border:1px dashed var(--border);color:var(--warm);padding:7px 16px;border-radius:5px;font-size:11px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif}
+.add-photo button:hover{border-color:var(--warm)}
 
-/* Contact */
-.contact-block{margin-top:32px;padding:36px 32px;border:1px solid var(--border);border-radius:6px;background:var(--white);display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.contact-email{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--warm);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:4px;transition:border-color .3s}
-.contact-email:hover{border-color:var(--warm)}
-.contact-note{font-size:13px;color:var(--muted);line-height:1.65}
+/* FOOTER */
+.mfooter{position:relative;z-index:1;text-align:center;padding:36px 20px;border-top:1px solid var(--border)}
+.mfooter p{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.mfooter strong{color:var(--warm);font-weight:400}
+.pfooter{padding:36px 20px;text-align:center;border-top:1px solid var(--border);max-width:740px;margin:0 auto}
+.pfooter p{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 
-/* Footer */
-footer{position:relative;z-index:1;text-align:center;padding:48px 24px;border-top:1px solid var(--border)}
-footer p{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-footer strong{color:var(--warm);font-weight:400}
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* ===== POPUP BASE ===== */
-.popup{display:none;position:fixed;z-index:10000;background:#1e1810;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px;box-shadow:0 10px 48px rgba(0,0,0,.4);font-family:'DM Sans',sans-serif}
-.popup.open{display:block}
-.popup h4{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);margin-bottom:14px}
-.popup-close{position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(240,235,227,.4);font-size:16px;cursor:pointer;line-height:1}
-.popup-close:hover{color:#f0ebe3}
-
-/* ===== FONT POPUP ===== */
-#font-popup{bottom:90px;right:24px;width:230px}
-.font-option{padding:10px 12px;border-radius:6px;cursor:pointer;color:#f0ebe3;font-size:15px;transition:background .2s;display:flex;justify-content:space-between;align-items:center}
-.font-option:hover{background:rgba(255,255,255,.08)}
-.font-option.active{background:var(--warm)}
-.font-option small{font-size:10px;opacity:.5;font-family:'DM Sans',sans-serif}
-
-/* ===== SIZE POPUP ===== */
-#size-popup{bottom:90px;right:270px;width:210px}
-.size-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.size-row label{font-size:11px;color:#f0ebe3;opacity:.7;width:54px}
-.size-row input[type=range]{flex:1;accent-color:var(--warm);-webkit-appearance:none;height:3px;background:rgba(255,255,255,.15);border-radius:3px;outline:none}
-.size-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--warm);cursor:pointer}
-.size-val{font-size:11px;color:var(--sand);width:28px;text-align:right}
-
-/* ===== COLOR POPUP ===== */
-#color-popup{bottom:90px;right:24px;width:300px}
-.color-section{margin-bottom:16px}
-.color-section-title{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,235,227,.5);margin-bottom:10px}
-
-/* Presets fond */
-.bg-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
-.bg-preset{height:36px;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:border-color .2s;position:relative;overflow:hidden}
-.bg-preset:hover{border-color:var(--sand)}
-.bg-preset.active{border-color:#fff}
-.bg-preset span{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.3)}
-.bg-preset:hover span{display:flex}
-
-/* Dégradé custom */
-.grad-builder{background:rgba(255,255,255,.05);border-radius:8px;padding:12px;margin-top:8px}
-.grad-preview{height:40px;border-radius:6px;margin-bottom:10px;transition:background .3s}
-.grad-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.grad-row label{font-size:11px;color:rgba(240,235,227,.6);width:70px;flex-shrink:0}
-.grad-row input[type=color]{width:32px;height:28px;border:none;border-radius:4px;cursor:pointer;padding:0;background:none}
-.grad-row select{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#f0ebe3;border-radius:4px;padding:4px 6px;font-size:11px;font-family:'DM Sans',sans-serif}
-.apply-grad-btn{width:100%;background:var(--warm);border:none;color:#fff;border-radius:6px;padding:8px;font-size:11px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;margin-top:4px}
-.apply-grad-btn:hover{background:var(--warm-light)}
-
-/* Couleur texte */
-.text-color-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.text-color-row label{font-size:11px;color:rgba(240,235,227,.6);flex:1}
-.text-color-row input[type=color]{width:36px;height:30px;border:none;border-radius:4px;cursor:pointer;padding:0;background:none}
-.text-color-swatches{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s;flex-shrink:0}
-.swatch:hover,.swatch.active{border-color:#fff}
-.apply-text-btn{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#f0ebe3;border-radius:6px;padding:7px;font-size:11px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:8px}
-.apply-text-btn:hover{background:var(--warm);border-color:var(--warm)}
-
-/* Tabs */
-.popup-tabs{display:flex;gap:4px;margin-bottom:16px}
-.ptab{flex:1;padding:6px;border:1px solid rgba(255,255,255,.1);border-radius:6px;background:none;color:rgba(240,235,227,.5);font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
-.ptab.active{background:var(--warm);border-color:var(--warm);color:#fff}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Responsive */
-@media(max-width:640px){
-  .g-cell:nth-child(n){grid-column:span 12;aspect-ratio:4/3}
-  .g-cell:nth-child(5){aspect-ratio:16/9}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .contact-block{padding:24px 18px}
-  #color-popup,#font-popup,#size-popup{right:8px;left:8px;width:auto;bottom:80px}
+/* RESPONSIVE */
+@media(max-width:580px){
+  .pgal{grid-template-columns:repeat(2,1fr)}
+  .pop{left:8px!important;right:8px!important;width:auto!important;bottom:76px!important}
+  .phdr{padding:12px 14px}
+  .psec{padding:32px 16px}
+  #bar{padding:0 8px;gap:4px}
 }
 </style>
 </head>
 <body>
-
-<!-- Fond séparé pour les dégradés -->
 <div id="page-bg"></div>
 
-<!-- BOUTON TOGGLE -->
-<button id="toggle-edit" onclick="toggleEdit()">
+<button id="fab" onclick="toggleEdit()">
   <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-  <span id="toggle-label">Modifier la page</span>
+  <span id="fab-lbl">Modifier</span>
 </button>
 
-<!-- BARRE D'ÉDITION -->
-<div id="edit-bar">
-  <span class="eb-logo">Matteo.czt</span>
-  <div class="eb-sep"></div>
-  <div class="eb-group">
-    <span class="eb-lbl">Police</span>
-    <button class="eb-btn" onclick="togglePopup('font-popup')">Aa ▾</button>
+<div id="bar">
+  <span class="bl">Matteo.czt</span>
+  <div class="bsep"></div>
+  <div class="bgrp"><span class="blbl">Police</span><button class="bb" onclick="togglePop('pop-font')">Aa &#9660;</button></div>
+  <div class="bsep"></div>
+  <div class="bgrp"><span class="blbl">Taille</span><button class="bb" onclick="togglePop('pop-size')">T&#8597; &#9660;</button></div>
+  <div class="bsep"></div>
+  <div class="bgrp"><span class="blbl">Format</span>
+    <button class="bb" onclick="fmt('bold')"><b>G</b></button>
+    <button class="bb" onclick="fmt('italic')"><i>I</i></button>
+    <button class="bb" onclick="fmt('underline')"><u>S</u></button>
   </div>
-  <div class="eb-sep"></div>
-  <div class="eb-group">
-    <span class="eb-lbl">Taille</span>
-    <button class="eb-btn" onclick="togglePopup('size-popup')">T↕ ▾</button>
+  <div class="bsep"></div>
+  <div class="bgrp"><span class="blbl">Alignement</span>
+    <button class="bb" onclick="aln('left')">&#8592;</button>
+    <button class="bb" onclick="aln('center')">&#8596;</button>
+    <button class="bb" onclick="aln('right')">&#8594;</button>
   </div>
-  <div class="eb-sep"></div>
-  <div class="eb-group">
-    <span class="eb-lbl">Format</span>
-    <button class="eb-btn" onclick="fmt('bold')"><b>G</b></button>
-    <button class="eb-btn" onclick="fmt('italic')"><i>I</i></button>
-    <button class="eb-btn" onclick="fmt('underline')"><u>S</u></button>
+  <div class="bsep"></div>
+  <div class="bgrp"><span class="blbl">Couleurs</span>
+    <button class="bb" onclick="togglePop('pop-color')" style="background:linear-gradient(135deg,#f7c59f,#8a6d4e,#2a1208);border:none">&#127912;</button>
   </div>
-  <div class="eb-sep"></div>
-  <div class="eb-group">
-    <span class="eb-lbl">Alignement</span>
-    <button class="eb-btn" onclick="align('left')" title="Gauche">⬅</button>
-    <button class="eb-btn" onclick="align('center')" title="Centre">↔</button>
-    <button class="eb-btn" onclick="align('right')" title="Droite">➡</button>
-  </div>
-  <div class="eb-sep"></div>
-  <div class="eb-group">
-    <span class="eb-lbl">Couleurs</span>
-    <button class="eb-btn" onclick="togglePopup('color-popup')" style="background:linear-gradient(135deg,#f7c59f,#8a6d4e,#3d2b1f);border:none">🎨 ▾</button>
-  </div>
-  <button class="eb-save" onclick="savePage()">💾 Enregistrer</button>
-  <button class="bsave" onclick="exportPage()" style="background:#5a6a8a;border-color:#5a6a8a;margin-left:6px">⬇️ Exporter</button>
+  <button class="bsave" onclick="saveAll()">&#128190; Enregistrer</button>
+  <button class="bexp" onclick="exportPage()">&#11015; Exporter</button>
 </div>
 
-<!-- ===== POPUP POLICE ===== -->
-<div id="font-popup" class="popup">
-  <button class="popup-close" onclick="closePopup('font-popup')">✕</button>
-  <h4>Choisir une police</h4>
-  <div class="font-option active" style="font-family:'Cormorant Garamond',serif" data-font="Cormorant Garamond, serif" onclick="applyFont(this)">Cormorant <small>Élégant</small></div>
-  <div class="font-option" style="font-family:'Playfair Display',serif" data-font="Playfair Display, serif" onclick="applyFont(this)">Playfair <small>Classique</small></div>
-  <div class="font-option" style="font-family:'Lora',serif" data-font="Lora, serif" onclick="applyFont(this)">Lora <small>Littéraire</small></div>
-  <div class="font-option" style="font-family:'DM Sans',sans-serif" data-font="DM Sans, sans-serif" onclick="applyFont(this)">DM Sans <small>Moderne</small></div>
-  <div class="font-option" style="font-family:'Raleway',sans-serif" data-font="Raleway, sans-serif" onclick="applyFont(this)">Raleway <small>Minimaliste</small></div>
-  <div class="font-option" style="font-family:'Josefin Sans',sans-serif" data-font="Josefin Sans, sans-serif" onclick="applyFont(this)">Josefin <small>Géométrique</small></div>
+<!-- POPUP POLICE -->
+<div id="pop-font" class="pop" style="bottom:78px;right:20px;width:220px">
+  <button class="px" onclick="closePop('pop-font')">&#x2715;</button>
+  <h4>Police</h4>
+  <div class="fo on" style="font-family:'Cormorant Garamond',serif" data-f="Cormorant Garamond,serif" onclick="applyFont(this)">Cormorant <small>Elegant</small></div>
+  <div class="fo" style="font-family:'Playfair Display',serif" data-f="Playfair Display,serif" onclick="applyFont(this)">Playfair <small>Classique</small></div>
+  <div class="fo" style="font-family:'Lora',serif" data-f="Lora,serif" onclick="applyFont(this)">Lora <small>Litteraire</small></div>
+  <div class="fo" style="font-family:'DM Sans',sans-serif" data-f="DM Sans,sans-serif" onclick="applyFont(this)">DM Sans <small>Moderne</small></div>
+  <div class="fo" style="font-family:'Raleway',sans-serif" data-f="Raleway,sans-serif" onclick="applyFont(this)">Raleway <small>Minimaliste</small></div>
+  <div class="fo" style="font-family:'Josefin Sans',sans-serif" data-f="Josefin Sans,sans-serif" onclick="applyFont(this)">Josefin <small>Geometrique</small></div>
 </div>
 
-<!-- ===== POPUP TAILLE ===== -->
-<div id="size-popup" class="popup">
-  <button class="popup-close" onclick="closePopup('size-popup')">✕</button>
-  <h4>Taille du texte</h4>
-  <div class="size-row"><label>Titres</label><input type="range" min="40" max="110" value="72" id="size-heading" oninput="sizeHeading(this.value)"/><span class="size-val" id="val-heading">72</span></div>
-  <div class="size-row"><label>Bio</label><input type="range" min="14" max="36" value="24" id="size-bio" oninput="sizeBio(this.value)"/><span class="size-val" id="val-bio">24</span></div>
-  <div class="size-row"><label>Corps</label><input type="range" min="12" max="22" value="14" id="size-body" oninput="sizeBody(this.value)"/><span class="size-val" id="val-body">14</span></div>
+<!-- POPUP TAILLE -->
+<div id="pop-size" class="pop" style="bottom:78px;right:250px;width:200px">
+  <button class="px" onclick="closePop('pop-size')">&#x2715;</button>
+  <h4>Taille</h4>
+  <div class="sr"><label>Titre</label><input type="range" min="40" max="110" value="72" id="sz-h" oninput="szH(this.value)"/><span class="sv" id="v-h">72</span></div>
+  <div class="sr"><label>Accroche</label><input type="range" min="14" max="36" value="22" id="sz-b" oninput="szB(this.value)"/><span class="sv" id="v-b">22</span></div>
+  <div class="sr"><label>Corps</label><input type="range" min="11" max="22" value="13" id="sz-s" oninput="szS(this.value)"/><span class="sv" id="v-s">13</span></div>
+  <div class="sr"><label>Panel</label><input type="range" min="14" max="32" value="21" id="sz-p" oninput="szP(this.value)"/><span class="sv" id="v-p">21</span></div>
 </div>
 
-<!-- ===== POPUP COULEURS ===== -->
-<div id="color-popup" class="popup" style="width:310px">
-  <button class="popup-close" onclick="closePopup('color-popup')">✕</button>
-  <h4>Couleurs &amp; Dégradés</h4>
-
-  <div class="popup-tabs">
-    <button class="ptab active" onclick="switchTab('tab-bg',this)">Fond</button>
-    <button class="ptab" onclick="switchTab('tab-text',this)">Texte</button>
-    <button class="ptab" onclick="switchTab('tab-grad',this)">Dégradé</button>
+<!-- POPUP COULEURS -->
+<div id="pop-color" class="pop" style="bottom:78px;right:20px;width:290px">
+  <button class="px" onclick="closePop('pop-color')">&#x2715;</button>
+  <h4>Couleurs et Degrades</h4>
+  <div class="ptabs">
+    <button class="pt on" onclick="swTab('tb-bg',this)">Fond</button>
+    <button class="pt" onclick="swTab('tb-txt',this)">Texte</button>
+    <button class="pt" onclick="swTab('tb-gr',this)">Degrade</button>
   </div>
-
-  <!-- TAB FOND -->
-  <div id="tab-bg" class="tab-panel active">
-    <div class="color-section-title">Couleurs rapides</div>
-    <div class="bg-presets">
-      <div class="bg-preset active" style="background:#f0ebe3" data-bg="#f0ebe3" data-type="solid" onclick="applyBgPreset(this)" title="Beige"><span>Beige</span></div>
-      <div class="bg-preset" style="background:#faf7f3" data-bg="#faf7f3" data-type="solid" onclick="applyBgPreset(this)" title="Crème"><span>Crème</span></div>
-      <div class="bg-preset" style="background:#1a1612" data-bg="#1a1612" data-type="solid" onclick="applyBgPreset(this)" title="Nuit"><span>Nuit</span></div>
-      <div class="bg-preset" style="background:#2c2c2c" data-bg="#2c2c2c" data-type="solid" onclick="applyBgPreset(this)" title="Charbon"><span>Charbon</span></div>
-      <div class="bg-preset" style="background:#1a1a2e" data-bg="#1a1a2e" data-type="solid" onclick="applyBgPreset(this)" title="Marine"><span>Marine</span></div>
-      <div class="bg-preset" style="background:#f5f0e8" data-bg="#f5f0e8" data-type="solid" onclick="applyBgPreset(this)" title="Lin"><span>Lin</span></div>
-      <div class="bg-preset" style="background:#1c1917" data-bg="#1c1917" data-type="solid" onclick="applyBgPreset(this)" title="Espresso"><span>Espresso</span></div>
-      <div class="bg-preset" style="background:#f8f4ef" data-bg="#f8f4ef" data-type="solid" onclick="applyBgPreset(this)" title="Ivoire"><span>Ivoire</span></div>
+  <div id="tb-bg" class="tp on">
+    <div class="sw-grid">
+      <div class="sw on" style="background:#f0ebe3" data-v="#f0ebe3" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#faf7f3" data-v="#faf7f3" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#1a1612" data-v="#1a1612" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#2c2c2c" data-v="#2c2c2c" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#1a1a2e" data-v="#1a1a2e" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#f5f0e8" data-v="#f5f0e8" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#1c2a1c" data-v="#1c2a1c" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:#3d2b1f" data-v="#3d2b1f" onclick="apSwBg(this)"></div>
     </div>
-    <div class="color-section-title" style="margin-top:10px">Couleur personnalisée</div>
-    <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-      <input type="color" id="custom-bg-color" value="#f0ebe3" style="width:42px;height:36px;border:none;border-radius:6px;cursor:pointer;padding:0;background:none"/>
-      <button class="apply-grad-btn" style="margin:0;flex:1" onclick="applyCustomBg()">Appliquer</button>
-    </div>
+    <div class="row2"><label>Libre</label><input type="color" class="inp-color" id="c-bg" value="#f0ebe3"/><button class="apbtn" style="margin:0;flex:1" onclick="apBg(document.getElementById('c-bg').value)">Appliquer</button></div>
   </div>
-
-  <!-- TAB TEXTE -->
-  <div id="tab-text" class="tab-panel">
-    <div class="color-section-title">Couleur du texte sélectionné</div>
-    <p style="font-size:11px;color:rgba(240,235,227,.45);margin-bottom:12px;line-height:1.5">Sélectionne d'abord du texte sur la page, puis choisis une couleur.</p>
-    <div class="text-color-swatches">
-      <div class="swatch" style="background:#2a2017" title="Sombre" onclick="applyTextColor('#2a2017')"></div>
-      <div class="swatch" style="background:#8a6d4e" title="Brun warm" onclick="applyTextColor('#8a6d4e')"></div>
-      <div class="swatch" style="background:#c4a882" title="Sable" onclick="applyTextColor('#c4a882')"></div>
-      <div class="swatch" style="background:#f0ebe3" title="Crème" onclick="applyTextColor('#f0ebe3')"></div>
-      <div class="swatch" style="background:#ffffff" title="Blanc" onclick="applyTextColor('#ffffff')"></div>
-      <div class="swatch" style="background:#d4a853" title="Or" onclick="applyTextColor('#d4a853')"></div>
-      <div class="swatch" style="background:#8fada8" title="Sauge" onclick="applyTextColor('#8fada8')"></div>
-      <div class="swatch" style="background:#c47a7a" title="Rose poudré" onclick="applyTextColor('#c47a7a')"></div>
-      <div class="swatch" style="background:#7a8fa6" title="Bleu gris" onclick="applyTextColor('#7a8fa6')"></div>
-      <div class="swatch" style="background:#9a7ab5" title="Mauve" onclick="applyTextColor('#9a7ab5')"></div>
-      <div class="swatch" style="background:#5a8a5a" title="Vert" onclick="applyTextColor('#5a8a5a')"></div>
-      <div class="swatch" style="background:#9a8878" title="Gris chaud" onclick="applyTextColor('#9a8878')"></div>
+  <div id="tb-txt" class="tp">
+    <p style="font-size:10px;color:rgba(240,235,227,.4);margin-bottom:9px;line-height:1.5">Selectionnez du texte puis choisissez.</p>
+    <div class="swrow">
+      <div class="swdot" style="background:#2a2017" onclick="apTxt('#2a2017')"></div>
+      <div class="swdot" style="background:#8a6d4e" onclick="apTxt('#8a6d4e')"></div>
+      <div class="swdot" style="background:#c4a882" onclick="apTxt('#c4a882')"></div>
+      <div class="swdot" style="background:#f0ebe3" onclick="apTxt('#f0ebe3')"></div>
+      <div class="swdot" style="background:#ffffff" onclick="apTxt('#ffffff')"></div>
+      <div class="swdot" style="background:#d4a853" onclick="apTxt('#d4a853')"></div>
+      <div class="swdot" style="background:#8fada8" onclick="apTxt('#8fada8')"></div>
+      <div class="swdot" style="background:#c47a7a" onclick="apTxt('#c47a7a')"></div>
+      <div class="swdot" style="background:#7a8fa6" onclick="apTxt('#7a8fa6')"></div>
+      <div class="swdot" style="background:#9a7ab5" onclick="apTxt('#9a7ab5')"></div>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
-      <label style="font-size:11px;color:rgba(240,235,227,.6)">Couleur libre</label>
-      <input type="color" id="custom-text-color" value="#2a2017" style="width:42px;height:30px;border:none;border-radius:4px;cursor:pointer;padding:0;background:none"/>
-      <button class="apply-text-btn" style="flex:1;margin:0" onclick="applyCustomTextColor()">Appliquer</button>
-    </div>
-    <div style="margin-top:12px">
-      <div class="color-section-title">Appliquer à toute la page</div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <button class="apply-grad-btn" style="margin:0" onclick="applyGlobalTextColor('dark')">Texte sombre</button>
-        <button class="apply-grad-btn" style="margin:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)" onclick="applyGlobalTextColor('light')">Texte clair</button>
-      </div>
+    <div class="row2"><label>Libre</label><input type="color" class="inp-color" id="c-txt" value="#2a2017"/><button class="apbtn" style="margin:0;flex:1" onclick="apTxt(document.getElementById('c-txt').value)">Appliquer</button></div>
+    <div style="display:flex;gap:5px;margin-top:6px">
+      <button class="apbtn" style="margin:0" onclick="globalTxt('#2a2017')">Texte sombre</button>
+      <button class="apbtn2" style="margin:0" onclick="globalTxt('#f0ebe3')">Texte clair</button>
     </div>
   </div>
-
-  <!-- TAB DÉGRADÉ -->
-  <div id="tab-grad" class="tab-panel">
-    <div class="color-section-title">Dégradés prêts à l'emploi</div>
-    <div class="bg-presets">
-      <div class="bg-preset" style="background:linear-gradient(135deg,#f7e8d0,#c4956a)" data-grad="linear-gradient(135deg,#f7e8d0,#c4956a)" data-type="grad" onclick="applyBgPreset(this)"><span>Dune</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#1a1612,#3d2b1f)" data-grad="linear-gradient(135deg,#1a1612,#3d2b1f)" data-type="grad" onclick="applyBgPreset(this)"><span>Nuit</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#0d0d1a,#1a1a3e,#0a0a12)" data-grad="linear-gradient(135deg,#0d0d1a,#1a1a3e,#0a0a12)" data-type="grad" onclick="applyBgPreset(this)"><span>Cosmos</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#f5f0e8,#e8d5b0,#d4b896)" data-grad="linear-gradient(135deg,#f5f0e8,#e8d5b0,#d4b896)" data-type="grad" onclick="applyBgPreset(this)"><span>Lin</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#1c2a1c,#2d4a2d,#1a3a1a)" data-grad="linear-gradient(135deg,#1c2a1c,#2d4a2d,#1a3a1a)" data-type="grad" onclick="applyBgPreset(this)"><span>Forêt</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)" data-grad="linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)" data-type="grad" onclick="applyBgPreset(this)"><span>Ocean</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#2d1b2e,#1a0a2e,#0d0d2e)" data-grad="linear-gradient(135deg,#2d1b2e,#1a0a2e,#0d0d2e)" data-type="grad" onclick="applyBgPreset(this)"><span>Velours</span></div>
-      <div class="bg-preset" style="background:linear-gradient(135deg,#f0e6d3,#dfc5a5,#c9a87a)" data-grad="linear-gradient(135deg,#f0e6d3,#dfc5a5,#c9a87a)" data-type="grad" onclick="applyBgPreset(this)"><span>Miel</span></div>
+  <div id="tb-gr" class="tp">
+    <div class="sw-grid">
+      <div class="sw" style="background:linear-gradient(135deg,#f7e8d0,#c4956a)" data-v="linear-gradient(135deg,#f7e8d0,#c4956a)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#1a1612,#3d2b1f)" data-v="linear-gradient(135deg,#1a1612,#3d2b1f)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#0d0d1a,#1a1a3e)" data-v="linear-gradient(135deg,#0d0d1a,#1a1a3e)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#f5f0e8,#d4b896)" data-v="linear-gradient(135deg,#f5f0e8,#d4b896)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#1c2a1c,#2d4a2d)" data-v="linear-gradient(135deg,#1c2a1c,#2d4a2d)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#1a1a2e,#0f3460)" data-v="linear-gradient(135deg,#1a1a2e,#0f3460)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#2d1b2e,#0d0d2e)" data-v="linear-gradient(135deg,#2d1b2e,#0d0d2e)" onclick="apSwBg(this)"></div>
+      <div class="sw" style="background:linear-gradient(135deg,#f0e6d3,#c9a87a)" data-v="linear-gradient(135deg,#f0e6d3,#c9a87a)" onclick="apSwBg(this)"></div>
     </div>
-    <div class="color-section-title" style="margin-top:14px">Créer mon dégradé</div>
-    <div class="grad-builder">
-      <div class="grad-preview" id="grad-preview" style="background:linear-gradient(135deg,#f7e8d0,#8a6d4e)"></div>
-      <div class="grad-row"><label>Couleur 1</label><input type="color" id="gc1" value="#f7e8d0" oninput="updateGradPreview()"/></div>
-      <div class="grad-row"><label>Couleur 2</label><input type="color" id="gc2" value="#8a6d4e" oninput="updateGradPreview()"/></div>
-      <div class="grad-row"><label>Couleur 3</label><input type="color" id="gc3" value="" oninput="updateGradPreview()"/><span style="font-size:10px;color:rgba(240,235,227,.4)">(opt.)</span></div>
-      <div class="grad-row">
-        <label>Direction</label>
-        <select id="grad-dir" onchange="updateGradPreview()">
-          <option value="135deg">Diagonal ↘</option>
-          <option value="to bottom">Vertical ↓</option>
-          <option value="to right">Horizontal →</option>
-          <option value="to top left">Diagonal ↖</option>
-          <option value="45deg">Diagonal ↗</option>
-        </select>
-      </div>
-      <button class="apply-grad-btn" onclick="applyCustomGrad()">✓ Appliquer ce dégradé</button>
+    <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,235,227,.45);margin:10px 0 7px">Creer le mien</div>
+    <div class="grad-prev" id="gp" style="background:linear-gradient(135deg,#f7e8d0,#8a6d4e)"></div>
+    <div class="drow"><label>Couleur 1</label><input type="color" id="gc1" value="#f7e8d0" oninput="updGrad()"/></div>
+    <div class="drow"><label>Couleur 2</label><input type="color" id="gc2" value="#8a6d4e" oninput="updGrad()"/></div>
+    <div class="drow"><label>Couleur 3</label><input type="color" id="gc3" value="" oninput="updGrad()"/><span style="font-size:9px;color:rgba(240,235,227,.3)">(opt.)</span></div>
+    <div class="drow"><label>Direction</label>
+      <select id="gdir" onchange="updGrad()">
+        <option value="135deg">Diagonal</option>
+        <option value="to bottom">Vertical</option>
+        <option value="to right">Horizontal</option>
+        <option value="45deg">Diagonal 2</option>
+      </select>
     </div>
+    <button class="apbtn" onclick="apCustomGrad()">Appliquer</button>
   </div>
 </div>
 
-<!-- ===== PAGE ===== -->
+<!-- PAGE PRINCIPALE -->
 <div id="page-wrap">
-
-  <!-- HERO -->
-  <div class="hero">
-    <p class="hero-tag editable" contenteditable="false">Créateur de contenu</p>
-    <div class="avatar-outer" id="avatar-outer" onclick="clickAvatar()">
-      <div class="avatar-ring"></div>
-      <div class="avatar-placeholder" id="avatar-display">M</div>
-      <input type="file" id="avatar-input" accept="image/*" style="display:none" onchange="loadAvatar(this)"/>
-      <div class="avatar-edit-hint">
-        <svg style="width:18px;height:18px;fill:#fff" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.92c.04-.3.07-.62.07-.93s-.03-.63-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.31-.09.64-.09.94s.02.63.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.21.07-.47-.12-.61l-2.01-1.58z"/></svg>
-        <span>Changer</span>
-      </div>
+<div class="hero">
+  <p class="htag e" contenteditable="false">Createur de contenu</p>
+  <div class="av-out" id="av-out" onclick="clickAv()">
+    <div class="av-ring"></div>
+    <div class="av-ph" id="av-disp">M</div>
+    <input type="file" id="av-in" accept="image/*" style="display:none" onchange="loadAv(this)"/>
+    <div class="av-hint">
+      <svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      <span>Modifier</span>
     </div>
-    <h1 class="hero-name"><span class="editable" contenteditable="false">Matt<em>eo</em></span></h1>
-    <p class="hero-handle editable" contenteditable="false">@matteo.czt</p>
-    <p class="hero-tagline editable" contenteditable="false">"Ta phrase d'accroche — quelques mots qui te définissent."</p>
-    <div class="scroll-hint"><span>Découvrir</span><div class="scroll-line"></div></div>
   </div>
+  <h1 class="hname e" contenteditable="false">Matt<em>eo</em></h1>
+  <p class="hhandle e" contenteditable="false">@matteo.czt</p>
+  <p class="hline e" contenteditable="false">"Ta phrase d'accroche ici."</p>
+  <p class="hbio e" contenteditable="false">Courte bio — 2 lignes max, simple et direct.</p>
 
-  <!-- BIO -->
-  <div class="divider"><span>À propos</span></div>
-  <section><div class="container reveal">
-    <p class="sec-label">Qui suis-je</p>
-    <div class="bio-text">
-      <p class="editable" contenteditable="false">Présente-toi ici en quelques phrases. Qui tu es, d'où tu viens, ce qui te passionne. <strong>Ce qui te rend unique.</strong></p>
-      <p class="editable" contenteditable="false">Continue ta présentation. Parle de ce que tu crées, de ton univers, de ce que les gens retrouvent sur tes réseaux.</p>
-      <p class="editable" contenteditable="false">Un dernier paragraphe si besoin — une anecdote, un projet en cours, ce qui t'anime au quotidien.</p>
-    </div>
-  </div></section>
-
-  <!-- PHOTOS -->
-  <div class="divider"><span>Photos</span></div>
-  <section><div class="container reveal">
-    <p class="sec-label">En images</p>
-    <div class="gallery-grid" id="gallery">
-      <div class="g-cell" onclick="clickPhoto(this,0)">
-        <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo 1</span></div>
-        <div class="photo-edit-overlay"><svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg><span>Ajouter</span></div>
+  <div class="chs">
+    <div class="ch" id="ch-0" onclick="openPanel('p0')">
+      <div class="ch-edit-bar"><button class="ch-edit-btn" onclick="event.stopPropagation();clickThumb(0)">&#9998; Photo</button></div>
+      <div class="ch-thumb" id="ch-thumb-0" onclick="event.stopPropagation();clickThumb(0)">
+        <div class="ch-thumb-ph" id="ch-thumb-ph-0">&#128640;</div>
+        <div class="ch-thumb-ov">Photo</div>
       </div>
-      <div class="g-cell" onclick="clickPhoto(this,1)">
-        <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo 2</span></div>
-        <div class="photo-edit-overlay"><svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg><span>Ajouter</span></div>
+      <input type="file" id="ch-in-0" accept="image/*" style="display:none" onchange="loadThumb(this,0)"/>
+      <div class="ch-content">
+        <span class="ch-title e" contenteditable="false">Parcours Entrepreneurial</span>
+        <span class="ch-desc e" contenteditable="false">Projets, vision business, ce que je construis.</span>
       </div>
-      <div class="g-cell" onclick="clickPhoto(this,2)">
-        <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo 3</span></div>
-        <div class="photo-edit-overlay"><svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg><span>Ajouter</span></div>
+      <span class="ch-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>
+
+    <div class="ch" id="ch-1" onclick="openPanel('p1')">
+      <div class="ch-edit-bar"><button class="ch-edit-btn" onclick="event.stopPropagation();clickThumb(1)">&#9998; Photo</button></div>
+      <div class="ch-thumb" id="ch-thumb-1" onclick="event.stopPropagation();clickThumb(1)">
+        <div class="ch-thumb-ph" id="ch-thumb-ph-1">&#127939;</div>
+        <div class="ch-thumb-ov">Photo</div>
       </div>
-      <div class="g-cell" onclick="clickPhoto(this,3)">
-        <div class="g-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo 4</span></div>
-        <div class="photo-edit-overlay"><svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg><span>Ajouter</span></div>
+      <input type="file" id="ch-in-1" accept="image/*" style="display:none" onchange="loadThumb(this,1)"/>
+      <div class="ch-content">
+        <span class="ch-title e" contenteditable="false">Corps &amp; Mental</span>
+        <span class="ch-desc e" contenteditable="false">Sport, discipline et philosophie au quotidien.</span>
       </div>
-      <div class="g-cell" onclick="clickPhoto(this,4)">
-        <div class="g-placeholder" style="min-height:140px"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Bannière large</span></div>
-        <div class="photo-edit-overlay"><svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg><span>Ajouter</span></div>
+      <span class="ch-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>
+  </div>
+</div>
+<div class="mfooter"><p>&#169; 2025 &#8212; <strong class="e" contenteditable="false">Matteo.czt</strong></p></div>
+</div>
+
+<!-- PANNEAU 0 — ENTREPRENEURIAT -->
+<div class="panel" id="p0">
+  <div class="pbg" id="pbg-0"></div>
+  <div class="pscroll">
+    <div class="phdr">
+      <button class="pback" onclick="closePanel('p0')">
+        <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Retour
+      </button>
+      <span class="phdrtitle e" contenteditable="false">Parcours Entrepreneurial</span>
+    </div>
+    <div class="phero">
+      <span class="phlabel e" contenteditable="false">Rubrique 01</span>
+      <h2 class="phtitle e" contenteditable="false">Parcours<br><em>Entrepreneurial</em></h2>
+      <p class="phintro e" contenteditable="false">Quelques mots sur ta vision, ce qui t'a pousse a entreprendre.</p>
+    </div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">Mon parcours</p>
+      <div class="tl" id="tl-0">
+        <div class="tli">
+          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
+          <span class="tli-date e" contenteditable="false">2020 - Debut</span>
+          <p class="tli-title e" contenteditable="false">Premier projet</p>
+          <p class="tli-body e" contenteditable="false">Decris ici ton premier projet, comment ca a commence, ce que tu en as appris.</p>
+        </div>
+        <div class="tli">
+          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
+          <span class="tli-date e" contenteditable="false">2022 - Pivot</span>
+          <p class="tli-title e" contenteditable="false">Tournant important</p>
+          <p class="tli-body e" contenteditable="false">Ce qui s'est passe ensuite. Un tournant, une decision importante, une lecon cle.</p>
+        </div>
+        <div class="tli">
+          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
+          <span class="tli-date e" contenteditable="false">Aujourd'hui</span>
+          <p class="tli-title e" contenteditable="false">Ou j'en suis</p>
+          <p class="tli-body e" contenteditable="false">Ta situation actuelle, tes projets en cours.</p>
+        </div>
+      </div>
+      <div class="add-tli"><button onclick="addTli('tl-0')">+ Ajouter une etape</button></div>
+    </div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">Ma vision</p>
+      <div class="rt">
+        <p class="e" contenteditable="false">Ecris librement sur ta philosophie business. <strong>Ce qui te differencie.</strong></p>
+        <p class="e" contenteditable="false">Un deuxieme paragraphe. Tes valeurs, ta methode, ce que tu as appris.</p>
       </div>
     </div>
-    <input type="file" id="photo-0" accept="image/*" style="display:none" onchange="loadPhoto(this,0)"/>
-    <input type="file" id="photo-1" accept="image/*" style="display:none" onchange="loadPhoto(this,1)"/>
-    <input type="file" id="photo-2" accept="image/*" style="display:none" onchange="loadPhoto(this,2)"/>
-    <input type="file" id="photo-3" accept="image/*" style="display:none" onchange="loadPhoto(this,3)"/>
-    <input type="file" id="photo-4" accept="image/*" style="display:none" onchange="loadPhoto(this,4)"/>
-  </div></section>
-
-  <!-- STATS -->
-  <div class="divider"><span>En chiffres</span></div>
-  <section><div class="container reveal">
-    <p class="sec-label">Ce que je fais</p>
-    <div class="stats-grid">
-      <div class="stat-item"><span class="stat-number editable" contenteditable="false">00K</span><span class="stat-label editable" contenteditable="false">Abonnés</span></div>
-      <div class="stat-item"><span class="stat-number editable" contenteditable="false">000</span><span class="stat-label editable" contenteditable="false">Vidéos</span></div>
-      <div class="stat-item"><span class="stat-number editable" contenteditable="false">4</span><span class="stat-label editable" contenteditable="false">Plateformes</span></div>
-      <div class="stat-item"><span class="stat-number editable" contenteditable="false">20</span><span class="stat-label editable" contenteditable="false">Ans</span></div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">En chiffres</p>
+      <div class="pstats" id="st-0">
+        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Projets lances</span></div>
+        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Annees d'experience</span></div>
+        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Personnes aidees</span></div>
+      </div>
+      <div class="add-stat"><button onclick="addStat('st-0')">+ Ajouter un chiffre</button></div>
     </div>
-  </div></section>
-
-  <!-- UNIVERS -->
-  <div class="divider"><span>Mon univers</span></div>
-  <section><div class="container reveal">
-    <p class="sec-label">Thématiques</p>
-    <div class="tags-wrap" id="tags-wrap">
-      <span class="tag editable" contenteditable="false">Sport</span>
-      <span class="tag editable" contenteditable="false">Trading</span>
-      <span class="tag editable" contenteditable="false">Lifestyle</span>
-      <span class="tag editable" contenteditable="false">Couple</span>
-      <span class="tag editable" contenteditable="false">Voyage</span>
-      <span class="tag editable" contenteditable="false">Mindset</span>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">En images</p>
+      <div class="pgal" id="pg-0"></div>
+      <div class="add-photo"><button onclick="addPhoto('pg-0')">+ Ajouter une photo</button></div>
     </div>
-    <div id="add-tag-wrap" style="display:none;margin-top:12px">
-      <button onclick="addTag()" style="background:none;border:1px dashed var(--border);color:var(--warm);padding:7px 16px;border-radius:999px;font-size:12px;letter-spacing:.1em;cursor:pointer;font-family:'DM Sans',sans-serif">+ Ajouter un thème</button>
-    </div>
-  </div></section>
+    <div class="pfooter"><p>&#169; 2025 &#8212; <strong>Matteo.czt</strong></p></div>
+  </div>
+</div>
 
-  <!-- CONTACT -->
-  <div class="divider"><span>Contact</span></div>
-  <section><div class="container reveal">
-    <p class="sec-label">Me contacter</p>
-    <div class="contact-block">
-      <span class="contact-email editable" contenteditable="false">matteoetjoanapro75@gmail.com</span>
-      <p class="contact-note editable" contenteditable="false">Pour toute demande de partenariat, collaboration ou contact pro, n'hésite pas à m'écrire directement par email.</p>
+<!-- PANNEAU 1 — SPORT -->
+<div class="panel" id="p1">
+  <div class="pbg" id="pbg-1"></div>
+  <div class="pscroll">
+    <div class="phdr">
+      <button class="pback" onclick="closePanel('p1')">
+        <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Retour
+      </button>
+      <span class="phdrtitle e" contenteditable="false">Corps &amp; Mental</span>
     </div>
-  </div></section>
-
-  <footer><p>© 2025 — <strong>Matteo.czt</strong></p></footer>
+    <div class="phero">
+      <span class="phlabel e" contenteditable="false">Rubrique 02</span>
+      <h2 class="phtitle e" contenteditable="false">Corps &amp;<br><em>Mental</em></h2>
+      <p class="phintro e" contenteditable="false">Ton rapport au sport, a l'effort, a la discipline au quotidien.</p>
+    </div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">Mon parcours sportif</p>
+      <div class="tl" id="tl-1">
+        <div class="tli">
+          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
+          <span class="tli-date e" contenteditable="false">Debut - Age / Annee</span>
+          <p class="tli-title e" contenteditable="false">Comment j'ai commence</p>
+          <p class="tli-body e" contenteditable="false">Decris comment le sport est entre dans ta vie.</p>
+        </div>
+        <div class="tli">
+          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
+          <span class="tli-date e" contenteditable="false">Etape cle</span>
+          <p class="tli-title e" contenteditable="false">Un tournant</p>
+          <p class="tli-body e" contenteditable="false">Un moment marquant — une competition, un objectif atteint.</p>
+        </div>
+        <div class="tli">
+          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
+          <span class="tli-date e" contenteditable="false">Aujourd'hui</span>
+          <p class="tli-title e" contenteditable="false">Mon quotidien sportif</p>
+          <p class="tli-body e" contenteditable="false">Ta routine actuelle, tes objectifs, ce que tu travailles.</p>
+        </div>
+      </div>
+      <div class="add-tli"><button onclick="addTli('tl-1')">+ Ajouter une etape</button></div>
+    </div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">Ma philosophie</p>
+      <div class="rt">
+        <p class="e" contenteditable="false">Ce que le sport t'a appris sur toi-meme. Le lien entre discipline et tout le reste. <strong>Ce que ca te donne.</strong></p>
+        <p class="e" contenteditable="false">Tes croyances, ta methode, ce que tu conseilles.</p>
+      </div>
+    </div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">En chiffres</p>
+      <div class="pstats" id="st-1">
+        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">km / semaine</span></div>
+        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Annees de pratique</span></div>
+        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Objectif 2025</span></div>
+      </div>
+      <div class="add-stat"><button onclick="addStat('st-1')">+ Ajouter un chiffre</button></div>
+    </div>
+    <div class="psec">
+      <p class="pslabel e" contenteditable="false">En images</p>
+      <div class="pgal" id="pg-1"></div>
+      <div class="add-photo"><button onclick="addPhoto('pg-1')">+ Ajouter une photo</button></div>
+    </div>
+    <div class="pfooter"><p>&#169; 2025 &#8212; <strong>Matteo.czt</strong></p></div>
+  </div>
 </div>
 
 <script>
-// ====== ACCÈS ADMIN ======
-const SECRET = 'pageLink@75';
-const isAdmin = new URLSearchParams(window.location.search).get('edit') === SECRET;
-const fabEl = document.getElementById('toggle-edit') || document.getElementById('fab');
-if(fabEl && !isAdmin) fabEl.style.display = 'none';
+var SECRET = 'pageLink@75';
+var isAdmin = new URLSearchParams(window.location.search).get('edit') === SECRET;
+if(isAdmin) document.getElementById('fab').classList.add('unlocked');
 
-// ====== STATE ======
-let editMode = false;
-let savedSelection = null;
+var editMode = false;
+var savedSel = null;
+var photoCt = {'pg-0':0,'pg-1':0};
 
-// ====== EDIT TOGGLE ======
-function toggleEdit() {
+function toggleEdit(){
   editMode = !editMode;
-  document.body.classList.toggle('edit-mode', editMode);
-  document.getElementById('edit-bar').classList.toggle('visible', editMode);
-  document.getElementById('toggle-label').textContent = editMode ? "Quitter l'édition" : 'Modifier la page';
-  document.getElementById('toggle-edit').style.background = editMode ? 'var(--warm)' : '';
-  document.querySelectorAll('.editable').forEach(el => el.contentEditable = editMode ? 'true' : 'false');
-  document.getElementById('add-tag-wrap').style.display = editMode ? 'block' : 'none';
-  if (!editMode) closeAllPopups();
+  document.body.classList.toggle('ed', editMode);
+  document.getElementById('bar').classList.toggle('on', editMode);
+  document.getElementById('fab-lbl').textContent = editMode ? 'Quitter' : 'Modifier';
+  document.getElementById('fab').style.background = editMode ? 'var(--warm)' : '';
+  document.querySelectorAll('.e').forEach(function(el){ el.contentEditable = editMode ? 'true' : 'false'; });
+  if(!editMode) closeAllPops();
 }
 
-// ====== POPUPS ======
-function togglePopup(id) {
-  const el = document.getElementById(id);
-  const wasOpen = el.classList.contains('open');
-  closeAllPopups();
-  if (!wasOpen) el.classList.add('open');
-}
-function closePopup(id) { document.getElementById(id).classList.remove('open'); }
-function closeAllPopups() {
-  document.querySelectorAll('.popup').forEach(p => p.classList.remove('open'));
-}
-document.addEventListener('click', e => {
-  if (!e.target.closest('.popup') && !e.target.closest('#edit-bar')) closeAllPopups();
-});
+function openPanel(id){ document.getElementById(id).classList.add('on'); document.body.style.overflow='hidden'; }
+function closePanel(id){ document.getElementById(id).classList.remove('on'); document.body.style.overflow=''; }
 
-// ====== TABS ======
-function switchTab(panelId, btn) {
-  btn.closest('.popup').querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  btn.closest('.popup').querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
-  document.getElementById(panelId).classList.add('active');
-  btn.classList.add('active');
-}
-
-// ====== AVATAR ======
-function clickAvatar() { if (editMode) document.getElementById('avatar-input').click(); }
-function loadAvatar(input) {
-  if (!input.files[0]) return;
-  const r = new FileReader();
-  r.onload = e => {
-    const d = document.getElementById('avatar-display');
-    d.outerHTML = `<img class="avatar-img" id="avatar-display" src="${e.target.result}" alt="Matteo"/>`;
-    localStorage.setItem('avatar', e.target.result);
+function clickAv(){ if(editMode) document.getElementById('av-in').click(); }
+function loadAv(input){
+  if(!input.files[0]) return;
+  var r = new FileReader();
+  r.onload = function(e){
+    var d = document.getElementById('av-disp');
+    d.outerHTML = '<img class="av-img" id="av-disp" src="'+e.target.result+'" alt="Matteo"/>';
+    localStorage.setItem('av', e.target.result);
   };
   r.readAsDataURL(input.files[0]);
 }
 
-// ====== PHOTOS ======
-function clickPhoto(cell, idx) { if (editMode) document.getElementById('photo-' + idx).click(); }
-function loadPhoto(input, idx) {
-  if (!input.files[0]) return;
-  const r = new FileReader();
-  r.onload = e => {
-    const cells = document.querySelectorAll('.g-cell');
-    cells[idx].innerHTML = `<img src="${e.target.result}" alt="Photo ${idx+1}"/>
-      <div class="photo-edit-overlay" onclick="document.getElementById('photo-${idx}').click()">
-        <svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg>
-        <span>Changer</span>
-      </div>`;
-    localStorage.setItem('photo_' + idx, e.target.result);
+function clickThumb(idx){
+  if(!editMode) return;
+  document.getElementById('ch-in-'+idx).click();
+}
+function loadThumb(input, idx){
+  if(!input.files[0]) return;
+  var r = new FileReader();
+  r.onload = function(e){
+    var ph = document.getElementById('ch-thumb-ph-'+idx);
+    if(ph) ph.outerHTML = '<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover;border-radius:10px" id="ch-thumb-ph-'+idx+'"/>';
+    localStorage.setItem('th-'+idx, e.target.result);
   };
   r.readAsDataURL(input.files[0]);
 }
 
-// ====== FONT ======
-function applyFont(el) {
-  const font = el.dataset.font;
-  document.querySelectorAll('.bio-text,.hero-tagline,.hero-name,.stat-number,.contact-email').forEach(e => e.style.fontFamily = font);
-  document.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
-  localStorage.setItem('font', font);
+function addPhoto(galId){
+  if(!editMode) return;
+  var inp = document.createElement('input');
+  inp.type='file'; inp.accept='image/*'; inp.style.display='none';
+  var idx = photoCt[galId]++;
+  inp.onchange = function(){
+    if(!inp.files[0]) return;
+    var r = new FileReader();
+    r.onload = function(e){
+      var gal = document.getElementById(galId);
+      var cell = document.createElement('div');
+      cell.className = 'pgc';
+      cell.innerHTML = '<img src="'+e.target.result+'" alt="Photo"/><div class="pgov" onclick="chPhoto(this,\''+galId+'\','+idx+')">Changer</div>';
+      gal.appendChild(cell);
+      localStorage.setItem(galId+'_'+idx, e.target.result);
+    };
+    r.readAsDataURL(inp.files[0]);
+  };
+  document.body.appendChild(inp); inp.click(); inp.remove();
+}
+function chPhoto(ov, galId, idx){
+  if(!editMode) return;
+  var inp = document.createElement('input');
+  inp.type='file'; inp.accept='image/*'; inp.style.display='none';
+  inp.onchange = function(){
+    if(!inp.files[0]) return;
+    var r = new FileReader();
+    r.onload = function(e){
+      ov.parentElement.querySelector('img').src = e.target.result;
+      localStorage.setItem(galId+'_'+idx, e.target.result);
+    };
+    r.readAsDataURL(inp.files[0]);
+  };
+  document.body.appendChild(inp); inp.click(); inp.remove();
 }
 
-// ====== SIZE ======
-function sizeHeading(v) { document.getElementById('val-heading').textContent=v; document.querySelector('.hero-name').style.fontSize=v+'px'; localStorage.setItem('size-heading',v); }
-function sizeBio(v) { document.getElementById('val-bio').textContent=v; document.querySelectorAll('.bio-text p').forEach(p=>p.style.fontSize=v+'px'); localStorage.setItem('size-bio',v); }
-function sizeBody(v) { document.getElementById('val-body').textContent=v; document.querySelectorAll('.hero-tag,.hero-handle,.contact-note,.sec-label').forEach(el=>el.style.fontSize=v+'px'); localStorage.setItem('size-body',v); }
+function addTli(tlId){
+  var tl = document.getElementById(tlId);
+  var item = document.createElement('div');
+  item.className = 'tli';
+  item.innerHTML = '<button class="tli-del" onclick="delTli(this)">&#x2715;</button><span class="tli-date e" contenteditable="'+(editMode?'true':'false')+'">Annee - Periode</span><p class="tli-title e" contenteditable="'+(editMode?'true':'false')+'">Titre</p><p class="tli-body e" contenteditable="'+(editMode?'true':'false')+'">Description.</p>';
+  tl.appendChild(item);
+}
+function delTli(btn){ if(confirm('Supprimer ?')) btn.closest('.tli').remove(); }
 
-// ====== FORMAT ======
-function fmt(cmd) { document.execCommand(cmd, false, null); }
-function align(dir) {
-  const sel = window.getSelection();
-  if (sel && sel.focusNode) {
-    const el = sel.focusNode.nodeType === 3 ? sel.focusNode.parentElement : sel.focusNode;
-    const editable = el.closest('.editable');
-    if (editable) editable.style.textAlign = dir;
+function addStat(stId){
+  var grid = document.getElementById(stId);
+  var item = document.createElement('div');
+  item.className = 'pst';
+  item.innerHTML = '<button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="'+(editMode?'true':'false')+'">0</span><span class="psl e" contenteditable="'+(editMode?'true':'false')+'">Label</span>';
+  grid.appendChild(item);
+}
+function delStat(btn){ if(confirm('Supprimer ?')) btn.closest('.pst').remove(); }
+
+function togglePop(id){ var el=document.getElementById(id); var was=el.classList.contains('on'); closeAllPops(); if(!was) el.classList.add('on'); }
+function closePop(id){ document.getElementById(id).classList.remove('on'); }
+function closeAllPops(){ document.querySelectorAll('.pop').forEach(function(p){ p.classList.remove('on'); }); }
+document.addEventListener('click', function(e){ if(!e.target.closest('.pop')&&!e.target.closest('#bar')&&!e.target.closest('.ch-edit-btn')) closeAllPops(); });
+function swTab(id, btn){
+  btn.closest('.pop').querySelectorAll('.tp').forEach(function(p){ p.classList.remove('on'); });
+  btn.closest('.pop').querySelectorAll('.pt').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById(id).classList.add('on'); btn.classList.add('on');
+}
+
+function applyFont(el){
+  var f = el.dataset.f;
+  document.querySelectorAll('.hname,.hline,.phtitle,.rt,.tli-title,.phintro').forEach(function(e){ e.style.fontFamily=f; });
+  document.querySelectorAll('.fo').forEach(function(o){ o.classList.remove('on'); });
+  el.classList.add('on');
+  localStorage.setItem('font', f);
+}
+
+function szH(v){ document.getElementById('v-h').textContent=v; document.querySelector('.hname').style.fontSize=v+'px'; localStorage.setItem('sz-h',v); }
+function szB(v){ document.getElementById('v-b').textContent=v; document.querySelectorAll('.hline,.hbio,.phintro').forEach(function(e){ e.style.fontSize=v+'px'; }); localStorage.setItem('sz-b',v); }
+function szS(v){ document.getElementById('v-s').textContent=v; document.querySelectorAll('.htag,.hhandle,.tli-body,.psl').forEach(function(e){ e.style.fontSize=v+'px'; }); localStorage.setItem('sz-s',v); }
+function szP(v){ document.getElementById('v-p').textContent=v; document.querySelectorAll('.rt p,.tli-body,.phintro').forEach(function(e){ e.style.fontSize=v+'px'; }); localStorage.setItem('sz-p',v); }
+
+function fmt(cmd){ document.execCommand(cmd,false,null); }
+function aln(dir){
+  var sel=window.getSelection();
+  if(sel&&sel.focusNode){
+    var el=sel.focusNode.nodeType===3?sel.focusNode.parentElement:sel.focusNode;
+    var ed=el.closest('.e');
+    if(ed) ed.style.textAlign=dir;
   }
 }
 
-// ====== BACKGROUND ======
-function applyBackground(value) {
-  document.getElementById('page-bg').style.background = value;
-  document.body.style.background = 'transparent';
-  document.querySelectorAll('.bg-preset').forEach(p => p.classList.remove('active'));
-  localStorage.setItem('bg', value);
+function apBg(val){
+  document.getElementById('page-bg').style.background=val;
+  document.body.style.background='transparent';
+  document.querySelectorAll('.pbg').forEach(function(pb){ pb.style.background=val; });
+  var isDark=val.indexOf('#1')!==-1||val.indexOf('#2')!==-1||val.indexOf('#0')!==-1;
+  document.querySelectorAll('.phdr').forEach(function(h){ h.style.background=isDark?'rgba(26,18,8,.7)':'rgba(240,235,227,.7)'; });
+  document.querySelectorAll('.sw').forEach(function(s){ s.classList.remove('on'); });
+  localStorage.setItem('bg',val);
 }
-function applyBgPreset(el) {
-  const val = el.dataset.type === 'grad' ? el.dataset.grad : el.dataset.bg;
-  applyBackground(val);
-  el.classList.add('active');
+function apSwBg(el){ apBg(el.dataset.v); el.classList.add('on'); }
+
+document.addEventListener('mouseup',function(){ if(editMode){var s=window.getSelection();if(s&&s.rangeCount>0)savedSel=s.getRangeAt(0).cloneRange();} });
+function apTxt(color){ if(savedSel){var s=window.getSelection();s.removeAllRanges();s.addRange(savedSel);} document.execCommand('foreColor',false,color); }
+function globalTxt(color){ document.querySelectorAll('.e,.hname,.hline,.phtitle,.rt').forEach(function(el){ el.style.color=color; }); localStorage.setItem('gtxt',color); }
+
+function updGrad(){
+  var c1=document.getElementById('gc1').value,c2=document.getElementById('gc2').value,c3=document.getElementById('gc3').value,d=document.getElementById('gdir').value;
+  document.getElementById('gp').style.background='linear-gradient('+d+','+c1+','+c2+(c3?','+c3:'')+')';
 }
-function applyCustomBg() {
-  const color = document.getElementById('custom-bg-color').value;
-  applyBackground(color);
+function apCustomGrad(){
+  var c1=document.getElementById('gc1').value,c2=document.getElementById('gc2').value,c3=document.getElementById('gc3').value,d=document.getElementById('gdir').value;
+  apBg('linear-gradient('+d+','+c1+','+c2+(c3?','+c3:'')+')');
 }
 
-// ====== TEXT COLOR ======
-function saveSelection() {
-  const sel = window.getSelection();
-  if (sel && sel.rangeCount > 0) savedSelection = sel.getRangeAt(0).cloneRange();
-}
-document.addEventListener('mouseup', () => { if (editMode) saveSelection(); });
-document.addEventListener('keyup', () => { if (editMode) saveSelection(); });
-
-function applyTextColor(color) {
-  if (savedSelection) {
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(savedSelection);
-  }
-  document.execCommand('foreColor', false, color);
-}
-function applyCustomTextColor() {
-  applyTextColor(document.getElementById('custom-text-color').value);
-}
-function applyGlobalTextColor(mode) {
-  const color = mode === 'dark' ? '#2a2017' : '#f0ebe3';
-  document.querySelectorAll('.editable,.bio-text,.hero-name,.hero-tagline,.stat-number,.stat-label,.hero-handle,.hero-tag,.contact-note').forEach(el => el.style.color = color);
-  localStorage.setItem('global-text-color', color);
-}
-
-// ====== GRADIENT BUILDER ======
-function updateGradPreview() {
-  const c1 = document.getElementById('gc1').value;
-  const c2 = document.getElementById('gc2').value;
-  const c3 = document.getElementById('gc3').value;
-  const dir = document.getElementById('grad-dir').value;
-  const stops = c3 ? `${c1},${c2},${c3}` : `${c1},${c2}`;
-  const grad = `linear-gradient(${dir},${stops})`;
-  document.getElementById('grad-preview').style.background = grad;
-}
-function applyCustomGrad() {
-  const c1 = document.getElementById('gc1').value;
-  const c2 = document.getElementById('gc2').value;
-  const c3 = document.getElementById('gc3').value;
-  const dir = document.getElementById('grad-dir').value;
-  const stops = c3 ? `${c1},${c2},${c3}` : `${c1},${c2}`;
-  applyBackground(`linear-gradient(${dir},${stops})`);
-}
-
-// ====== TAGS ======
-function addTag() {
-  const name = prompt('Nom du thème :');
-  if (!name) return;
-  const wrap = document.getElementById('tags-wrap');
-  const tag = document.createElement('span');
-  tag.className = 'tag editable';
-  tag.contentEditable = 'true';
-  tag.textContent = name;
-  wrap.appendChild(tag);
-}
-
-// ====== SAVE ======
-function savePage() {
-  document.querySelectorAll('.editable').forEach((el, i) => localStorage.setItem('text_'+i, el.innerHTML));
-  ['heading','bio','body'].forEach(k => {
-    const el = document.getElementById('size-'+k);
-    if (el) localStorage.setItem('size-'+k, el.value);
+function saveAll(){
+  document.querySelectorAll('.e').forEach(function(el,i){ localStorage.setItem('t_'+i,el.innerHTML); });
+  ['0','1'].forEach(function(n){
+    var tl=document.getElementById('tl-'+n); if(tl) localStorage.setItem('tl_'+n,tl.innerHTML);
+    var st=document.getElementById('st-'+n); if(st) localStorage.setItem('st_'+n,st.innerHTML);
+    var pg=document.getElementById('pg-'+n); if(pg) localStorage.setItem('pg_'+n,pg.innerHTML);
   });
-  const btn = document.querySelector('.eb-save');
-  const orig = btn.textContent;
-  btn.textContent = '✓ Enregistré !';
-  btn.style.background = '#5a8a5a';
-  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2200);
+  var btn=document.querySelector('.bsave'); btn.textContent='Enregistre !'; btn.style.background='#5a8a5a';
+  setTimeout(function(){ btn.textContent='Enregistrer'; btn.style.background=''; },2000);
 }
 
-// ====== EXPORT ======
 function exportPage(){
-  // Sauvegarder tout d'abord
-  document.querySelectorAll('.editable').forEach(function(el,i){localStorage.setItem('text_'+i,el.innerHTML);});
-  
-  // Collecter toutes les donnees
-  var data = {};
-  for(var i=0;i<localStorage.length;i++){
-    var k=localStorage.key(i);
-    data[k]=localStorage.getItem(k);
-  }
-  
-  // Creer le HTML avec donnees injectees
-  var dataScript = '<scr'+'ipt>window.__PRELOAD__='+JSON.stringify(data)+';<'+'/scr'+'ipt>';
-  
-  // Cloner le document
+  saveAll();
   var clone = document.documentElement.cloneNode(true);
-  
-  // Retirer barre edition et FAB
-  var bar = clone.querySelector('#edit-bar');
-  var tgl = clone.querySelector('#toggle-edit');
-  if(bar) bar.remove();
-  if(tgl) tgl.remove();
-  
-  // Retirer contenteditable
-  clone.querySelectorAll('[contenteditable]').forEach(function(el){el.removeAttribute('contenteditable');});
+  var bar=clone.querySelector('#bar'); if(bar) bar.remove();
+  var fab=clone.querySelector('#fab'); if(fab) fab.style.display='none';
+  clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
   
   // Copier textes
-  var liveE = document.querySelectorAll('.editable');
-  var cloneE = clone.querySelectorAll('.editable');
-  liveE.forEach(function(el,i){if(cloneE[i])cloneE[i].innerHTML=el.innerHTML;});
+  var liveE=document.querySelectorAll('.e');
+  var cloneE=clone.querySelectorAll('.e');
+  liveE.forEach(function(el,i){ if(cloneE[i]) cloneE[i].innerHTML=el.innerHTML; });
   
+  // Copier styles inline
+  var liveAll=document.querySelectorAll('.hname,.hline,.hbio,.phintro,.phtitle,.htag,.hhandle');
+  var cloneAll=clone.querySelectorAll('.hname,.hline,.hbio,.phintro,.phtitle,.htag,.hhandle');
+  liveAll.forEach(function(el,i){ if(cloneAll[i]&&el.style.cssText) cloneAll[i].style.cssText=el.style.cssText; });
+
   // Copier fond
-  var liveBg = document.getElementById('page-bg');
-  var cloneBg = clone.querySelector('#page-bg');
-  if(liveBg && cloneBg) cloneBg.style.background = liveBg.style.background;
-  
-  // Copier panneaux dynamiques
+  var liveBg=document.getElementById('page-bg');
+  var cloneBg=clone.querySelector('#page-bg');
+  if(liveBg&&cloneBg) cloneBg.style.background=liveBg.style.background;
+
+  // Copier panneaux
   ['tl-0','tl-1','st-0','st-1','pg-0','pg-1'].forEach(function(id){
     var live=document.getElementById(id);
     var cl=clone.querySelector('#'+id);
-    if(live&&cl)cl.innerHTML=live.innerHTML;
+    if(live&&cl) cl.innerHTML=live.innerHTML;
   });
-  
+
+  // Copier avatar
+  var liveAv=document.getElementById('av-disp');
+  var cloneAvEl=clone.querySelector('#av-disp');
+  if(liveAv&&cloneAvEl) cloneAvEl.outerHTML=liveAv.outerHTML;
+
   // Copier thumbnails
   ['0','1'].forEach(function(n){
     var liveT=document.getElementById('ch-thumb-'+n);
     var cloneT=clone.querySelector('#ch-thumb-'+n);
-    if(liveT&&cloneT)cloneT.innerHTML=liveT.innerHTML;
+    if(liveT&&cloneT) cloneT.innerHTML=liveT.innerHTML;
+    var liveH=document.getElementById('ch-thumb-ph-'+n);
+    var cloneH=clone.querySelector('#ch-thumb-ph-'+n);
+    if(liveH&&cloneH) cloneH.outerHTML=liveH.outerHTML;
   });
-  
-  // Copier avatar
-  var liveAv=document.getElementById('av-disp');
-  var cloneAv=clone.querySelector('#av-disp');
-  if(liveAv&&cloneAv)cloneAv.outerHTML=liveAv.outerHTML;
-  
-  // Injecter le preload script
-  var tmpDiv = document.createElement('div');
-  tmpDiv.innerHTML = dataScript;
-  var scriptNode = tmpDiv.firstChild;
-  clone.querySelector('body').insertBefore(scriptNode, clone.querySelector('body').firstChild);
-  
-  // Telecharger
-  var html = '<!DOCTYPE html>\n' + clone.outerHTML;
-  var blob = new Blob([html], {type:'text/html;charset=utf-8'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'index.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+
+  // Copier panneaux background
+  document.querySelectorAll('.pbg,.phdr').forEach(function(el){
+    var clEl=clone.querySelector('#'+el.id);
+    if(clEl&&el.style.background) clEl.style.background=el.style.background;
+  });
+
+  var html='<!DOCTYPE html>\n'+clone.outerHTML;
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='index.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(a.href);
-  
-  // Feedback
-  var btns = document.querySelectorAll('.bsave,.eb-save');
-  btns.forEach(function(btn){
-    if(btn.textContent.indexOf('Exporter')>-1){
-      var orig=btn.textContent;
-      btn.textContent='Exporte !';
-      btn.style.background='#5a8a5a';
-      setTimeout(function(){btn.textContent=orig;btn.style.background='#5a6a8a';},2200);
-    }
-  });
+  var btn=document.querySelector('.bexp'); btn.textContent='Exporte !'; btn.style.background='#5a8a5a';
+  setTimeout(function(){ btn.textContent='Exporter'; btn.style.background='#5a6a8a'; },2200);
 }
 
-// ====== LOAD ======// ====== LOAD ======
-function loadSaved() {
-  // Charger donnees pre-injectees si disponibles
-  if(window.__PRELOAD__){
-    for(var k in window.__PRELOAD__){ try{localStorage.setItem(k,window.__PRELOAD__[k]);}catch(e){} }
-  }
-  document.querySelectorAll('.editable').forEach((el, i) => {
-    const s = localStorage.getItem('text_'+i);
-    if (s) el.innerHTML = s;
+function loadAll(){
+  if(window.__PRELOAD__){ for(var k in window.__PRELOAD__){ try{localStorage.setItem(k,window.__PRELOAD__[k]);}catch(e){} } }
+  document.querySelectorAll('.e').forEach(function(el,i){ var s=localStorage.getItem('t_'+i); if(s) el.innerHTML=s; });
+  var av=localStorage.getItem('av');
+  if(av){ var d=document.getElementById('av-disp'); if(d) d.outerHTML='<img class="av-img" id="av-disp" src="'+av+'" alt="Matteo"/>'; }
+  ['0','1'].forEach(function(n){
+    var tl=localStorage.getItem('tl_'+n); if(tl){var el=document.getElementById('tl-'+n);if(el)el.innerHTML=tl;}
+    var st=localStorage.getItem('st_'+n); if(st){var el=document.getElementById('st-'+n);if(el)el.innerHTML=st;}
+    var pg=localStorage.getItem('pg_'+n); if(pg){var el=document.getElementById('pg-'+n);if(el){el.innerHTML=pg;photoCt['pg-'+n]=el.querySelectorAll('.pgc').length;}}
+    var th=localStorage.getItem('th-'+n); if(th){var ph=document.getElementById('ch-thumb-ph-'+n);if(ph)ph.outerHTML='<img src="'+th+'" style="width:100%;height:100%;object-fit:cover;border-radius:10px" id="ch-thumb-ph-'+n+'"/>';}
   });
-  const avatar = localStorage.getItem('avatar');
-  if (avatar) {
-    const d = document.getElementById('avatar-display');
-    if (d) d.outerHTML = `<img class="avatar-img" id="avatar-display" src="${avatar}" alt="Matteo"/>`;
-  }
-  for (let i = 0; i < 5; i++) {
-    const p = localStorage.getItem('photo_'+i);
-    if (p) {
-      const cells = document.querySelectorAll('.g-cell');
-      if (cells[i]) cells[i].innerHTML = `<img src="${p}" alt="Photo ${i+1}"/>
-        <div class="photo-edit-overlay" onclick="document.getElementById('photo-${i}').click()">
-          <svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8" style="stroke:#fff;fill:none;stroke-width:2"/><line x1="12" y1="3" x2="12" y2="15" style="stroke:#fff;stroke-width:2"/></svg>
-          <span>Changer</span>
-        </div>`;
-    }
-  }
-  const bg = localStorage.getItem('bg');
-  if (bg) { document.getElementById('page-bg').style.background = bg; document.body.style.background = 'transparent'; }
-  const font = localStorage.getItem('font');
-  if (font) document.querySelectorAll('.bio-text,.hero-tagline,.hero-name').forEach(el => el.style.fontFamily = font);
-  const gtc = localStorage.getItem('global-text-color');
-  if (gtc) document.querySelectorAll('.editable,.bio-text,.hero-name').forEach(el => el.style.color = gtc);
-  const sh = localStorage.getItem('size-heading');
-  if (sh) { document.querySelector('.hero-name').style.fontSize = sh+'px'; document.getElementById('size-heading').value = sh; document.getElementById('val-heading').textContent = sh; }
-  const sb = localStorage.getItem('size-bio');
-  if (sb) { document.querySelectorAll('.bio-text p').forEach(p => p.style.fontSize = sb+'px'); document.getElementById('size-bio').value = sb; document.getElementById('val-bio').textContent = sb; }
+  var bg=localStorage.getItem('bg');
+  if(bg){ document.getElementById('page-bg').style.background=bg; document.body.style.background='transparent'; document.querySelectorAll('.pbg').forEach(function(pb){pb.style.background=bg;}); var isDark=bg.indexOf('#1')!==-1||bg.indexOf('#2')!==-1||bg.indexOf('#0')!==-1; document.querySelectorAll('.phdr').forEach(function(h){h.style.background=isDark?'rgba(26,18,8,.7)':'rgba(240,235,227,.7)';}); }
+  var f=localStorage.getItem('font');
+  if(f) document.querySelectorAll('.hname,.hline,.phtitle,.rt,.tli-title,.phintro').forEach(function(el){el.style.fontFamily=f;});
+  var gtc=localStorage.getItem('gtxt');
+  if(gtc) document.querySelectorAll('.e,.hname,.hline,.phtitle,.rt').forEach(function(el){el.style.color=gtc;});
+  var sh=localStorage.getItem('sz-h'); if(sh){document.querySelector('.hname').style.fontSize=sh+'px';document.getElementById('sz-h').value=sh;document.getElementById('v-h').textContent=sh;}
+  var sb=localStorage.getItem('sz-b'); if(sb){document.querySelectorAll('.hline,.hbio,.phintro').forEach(function(e){e.style.fontSize=sb+'px';});document.getElementById('sz-b').value=sb;document.getElementById('v-b').textContent=sb;}
 }
 
-// ====== SCROLL REVEAL ======
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-loadSaved();
+loadAll();
 </script>
 </body>
 </html>
