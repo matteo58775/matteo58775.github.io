@@ -270,7 +270,7 @@ body.ed .add-photo{display:block}
   <div class="bgrp"><span class="blbl">Couleurs</span>
     <button class="bb" onclick="togglePop('pop-color')" style="background:linear-gradient(135deg,#f7c59f,#8a6d4e,#2a1208);border:none">🎨▾</button>
   </div>
-  <button class="bsave" onclick="saveAll()">💾 Enregistrer</button>
+  <button class="bsave" onclick="saveAll()">💾 Enregistrer</button><button class="bsave" onclick="exportPage()" style="background:#5a6a8a;border-color:#5a6a8a;margin-left:6px">⬇️ Exporter</button>
 </div>
 
 <!-- POP FONT -->
@@ -857,6 +857,45 @@ function saveAll(){
   const btn=document.querySelector('.bsave'), orig=btn.textContent;
   btn.textContent='✓ Enregistré !'; btn.style.background='#5a8a5a';
   setTimeout(()=>{ btn.textContent=orig; btn.style.background=''; }, 2000);
+}
+
+// ══════════════════════════════════════
+//  EXPORT
+// ══════════════════════════════════════
+function exportPage(){
+  // Save everything first
+  document.querySelectorAll('.e').forEach((el,i)=>localStorage.setItem('t_'+i, el.innerHTML));
+  ['0','1'].forEach(n=>{
+    const tl=document.getElementById('tl-'+n); if(tl) localStorage.setItem('tl_html_'+n, tl.innerHTML);
+    const st=document.getElementById('st-'+n); if(st) localStorage.setItem('st_html_'+n, st.innerHTML);
+    const pg=document.getElementById('pg-'+n); if(pg) localStorage.setItem('pg_html_'+n, pg.innerHTML);
+  });
+
+  // Get current HTML and inject all saved data inline
+  let html = document.documentElement.outerHTML;
+
+  // Inject a script at the end that pre-loads all localStorage data inline
+  const data = {};
+  for(let i=0; i<localStorage.length; i++){
+    const k = localStorage.key(i);
+    data[k] = localStorage.getItem(k);
+  }
+
+  const inlineScript = `<script>
+(function(){
+  const data = ${JSON.stringify(data)};
+  for(const k in data){ try{ localStorage.setItem(k, data[k]); }catch(e){} }
+})();
+<\/script>`;
+
+  html = html.replace('</body>', inlineScript + '</body>');
+
+  const blob = new Blob([html], {type: 'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'index.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 // ══════════════════════════════════════
