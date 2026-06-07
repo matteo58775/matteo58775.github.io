@@ -99,15 +99,15 @@ body.ed .av-out:hover .av-hint{display:flex}
 
 /* CHAPTER BUTTONS — style Linktree */
 .chs{display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px;opacity:0;animation:fu .8s ease forwards .75s;margin-top:24px}
-.ch{width:100%;position:relative;border-radius:14px;cursor:pointer;border:1px solid var(--border);background:var(--white);padding:10px 14px;display:flex;align-items:center;gap:14px;transition:all .28s;user-select:none}
-.ch:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(42,32,23,.1);border-color:var(--warm)}
+.ch{width:100%;position:relative;border-radius:16px;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:10px 14px;display:flex;align-items:center;gap:14px;transition:all .28s;user-select:none}
+.ch:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);transform:translateY(-2px)}
 .ch-thumb{width:44px;height:44px;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);flex-shrink:0;position:relative}
 .ch-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .ch-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px}
 .ch-thumb-ov{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;font-size:9px;color:#fff;border-radius:10px;text-transform:uppercase;letter-spacing:.1em}
 body.ed .ch-thumb:hover .ch-thumb-ov{display:flex}
 .ch-content{flex:1;min-width:0;text-align:left}
-.ch-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--text);display:block;margin-bottom:3px}
+.ch-title{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--text);display:block;margin-bottom:3px}
 .ch-desc{font-size:11px;color:var(--muted);line-height:1.4;display:block}
 .ch-arrow{flex-shrink:0;color:var(--warm);transition:transform .25s}
 .ch:hover .ch-arrow{transform:translateX(4px)}
@@ -361,7 +361,6 @@ body.ed .add-photo{display:block}
       <input type="file" id="ch-in-0" accept="image/*" style="display:none" onchange="loadThumb(this,0)"/>
       <div class="ch-content">
         <span class="ch-title e" contenteditable="false">Parcours Entrepreneurial</span>
-        <span class="ch-desc e" contenteditable="false">Projets, vision business, ce que je construis.</span>
       </div>
       <span class="ch-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
@@ -375,7 +374,6 @@ body.ed .add-photo{display:block}
       <input type="file" id="ch-in-1" accept="image/*" style="display:none" onchange="loadThumb(this,1)"/>
       <div class="ch-content">
         <span class="ch-title e" contenteditable="false">Corps &amp; Mental</span>
-        <span class="ch-desc e" contenteditable="false">Sport, discipline et philosophie au quotidien.</span>
       </div>
       <span class="ch-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
