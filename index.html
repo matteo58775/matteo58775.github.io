@@ -81,7 +81,7 @@ body.ed .e:focus{box-shadow:0 0 0 2px var(--warm);border-radius:3px}
 #page-wrap{position:relative;z-index:1;transition:padding-top .3s}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 20px 100px;position:relative}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px 60px;position:relative}
 .htag{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:32px;opacity:0;animation:fu .8s ease forwards .1s}
 .av-out{position:relative;width:130px;height:130px;margin:0 auto 36px;cursor:pointer;opacity:0;animation:fu .8s ease forwards .2s}
 .av-ring{position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--border);animation:spin 10s linear infinite;pointer-events:none}
@@ -98,7 +98,7 @@ body.ed .av-out:hover .av-hint{display:flex}
 .hbio{font-size:13px;color:var(--muted);max-width:400px;line-height:1.8;opacity:0;animation:fu .8s ease forwards .6s;margin-bottom:56px}
 
 /* CHAPTER BUTTONS — style Linktree */
-.chs{display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px;opacity:0;animation:fu .8s ease forwards .75s}
+.chs{display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px;opacity:0;animation:fu .8s ease forwards .75s;margin-top:24px}
 .ch{width:100%;position:relative;border-radius:14px;cursor:pointer;border:1px solid var(--border);background:var(--white);padding:10px 14px;display:flex;align-items:center;gap:14px;transition:all .28s;user-select:none}
 .ch:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(42,32,23,.1);border-color:var(--warm)}
 .ch-thumb{width:44px;height:44px;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);flex-shrink:0;position:relative}
@@ -206,7 +206,7 @@ body.ed .add-photo{display:block}
   .psec{padding:32px 16px}
   #bar{padding:0 8px;gap:4px}
 }
-.main-text{max-width:620px;margin:48px auto 0;text-align:center;font-family:'DM Sans',sans-serif;font-weight:300;font-size:15px;line-height:1.85;color:rgba(255,255,255,0.82)}
+.main-text{max-width:620px;margin:48px auto 0;text-align:left;font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;line-height:1.85;color:rgba(255,255,255,0.82);padding:0 20px}
 .main-text p{margin-bottom:20px}
 .main-text .quote{font-style:italic;font-size:17px;color:rgba(255,255,255,0.95);margin:28px 0}
 </style>
@@ -340,7 +340,6 @@ body.ed .add-photo{display:block}
 <!-- PAGE PRINCIPALE -->
 <div id="page-wrap">
 <div class="hero">
-  <p class="htag e" contenteditable="false">Createur de contenu</p>
   <div class="av-out" id="av-out" onclick="clickAv()">
     <div class="av-ring"></div>
     <div class="av-ph" id="av-disp">M</div>
@@ -350,10 +349,7 @@ body.ed .add-photo{display:block}
       <span>Modifier</span>
     </div>
   </div>
-  <h1 class="hname e" contenteditable="false">Matt<em>eo</em></h1>
-  <p class="hhandle e" contenteditable="false">@matteo.czt</p>
   <p class="hline e" contenteditable="false">"Ta phrase d'accroche ici."</p>
-  <p class="hbio e" contenteditable="false">Courte bio — 2 lignes max, simple et direct.</p>
 
   <div class="chs">
     <div class="ch" id="ch-0" onclick="openPanel('p0')">
