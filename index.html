@@ -136,6 +136,7 @@ body.ed .ch-edit-bar{display:flex}
 .phtitle em{font-style:italic;color:var(--warm)}
 .phintro{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.8vw,22px);font-style:italic;font-weight:300;color:var(--warm2);line-height:1.65;max-width:500px;margin:0 auto}
 #p0 .phintro{color:#1a1208;font-weight:600;font-style:normal;}
+#p1 .phintro{color:#1a1208;font-weight:600;font-style:normal;}
 .psec{padding:40px 22px;max-width:740px;margin:0 auto;border-top:1px solid var(--border)}
 .pslabel{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .pslabel::after{content:'';width:24px;height:1px;background:var(--warm)}
@@ -681,54 +682,8 @@ body.ed .add-photo{display:block}
       <span class="phdrtitle e" contenteditable="false">Corps &amp; Mental</span>
     </div>
     <div class="phero">
-      <span class="phlabel e" contenteditable="false">Rubrique 02</span>
       <h2 class="phtitle e" contenteditable="false">Corps &amp;<br><em>Mental</em></h2>
-      <p class="phintro e" contenteditable="false">Ton rapport au sport, a l'effort, a la discipline au quotidien.</p>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">Mon parcours sportif</p>
-      <div class="tl" id="tl-1">
-        <div class="tli">
-          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
-          <span class="tli-date e" contenteditable="false">Debut - Age / Annee</span>
-          <p class="tli-title e" contenteditable="false">Comment j'ai commence</p>
-          <p class="tli-body e" contenteditable="false">Decris comment le sport est entre dans ta vie.</p>
-        </div>
-        <div class="tli">
-          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
-          <span class="tli-date e" contenteditable="false">Etape cle</span>
-          <p class="tli-title e" contenteditable="false">Un tournant</p>
-          <p class="tli-body e" contenteditable="false">Un moment marquant — une competition, un objectif atteint.</p>
-        </div>
-        <div class="tli">
-          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
-          <span class="tli-date e" contenteditable="false">Aujourd'hui</span>
-          <p class="tli-title e" contenteditable="false">Mon quotidien sportif</p>
-          <p class="tli-body e" contenteditable="false">Ta routine actuelle, tes objectifs, ce que tu travailles.</p>
-        </div>
-      </div>
-      <div class="add-tli"><button onclick="addTli('tl-1')">+ Ajouter une etape</button></div>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">Ma philosophie</p>
-      <div class="rt">
-        <p class="e" contenteditable="false">Ce que le sport t'a appris sur toi-meme. Le lien entre discipline et tout le reste. <strong>Ce que ca te donne.</strong></p>
-        <p class="e" contenteditable="false">Tes croyances, ta methode, ce que tu conseilles.</p>
-      </div>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">En chiffres</p>
-      <div class="pstats" id="st-1">
-        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">km / semaine</span></div>
-        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Annees de pratique</span></div>
-        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Objectif 2025</span></div>
-      </div>
-      <div class="add-stat"><button onclick="addStat('st-1')">+ Ajouter un chiffre</button></div>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">En images</p>
-      <div class="pgal" id="pg-1"></div>
-      <div class="add-photo"><button onclick="addPhoto('pg-1')">+ Ajouter une photo</button></div>
+      <p class="phintro e" contenteditable="false">phrase d'accroche.</p>
     </div>
     <div class="pfooter"><p>&#169; 2025 &#8212; <strong>Matteo.czt</strong></p></div>
   </div>
