@@ -135,6 +135,7 @@ body.ed .ch-edit-bar{display:flex}
 .phtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:20px}
 .phtitle em{font-style:italic;color:var(--warm)}
 .phintro{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.8vw,22px);font-style:italic;font-weight:300;color:var(--warm2);line-height:1.65;max-width:500px;margin:0 auto}
+#p0 .phintro{color:#1a1208;font-weight:600;font-style:normal;}
 .psec{padding:40px 22px;max-width:740px;margin:0 auto;border-top:1px solid var(--border)}
 .pslabel{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--warm);margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .pslabel::after{content:'';width:24px;height:1px;background:var(--warm)}
@@ -216,7 +217,7 @@ body.ed .add-photo{display:block}
 .parcours-text ul{list-style:none;padding:0;margin:10px 0;}
 .parcours-text ul li{padding:3px 0 3px 16px;position:relative;}
 .parcours-text ul li::before{content:'-';position:absolute;left:0;color:rgba(255,255,255,0.5);}
-.parcours-text .label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#1a1208;background:rgba(255,255,255,0.85);padding:3px 8px;border-radius:4px;margin-bottom:8px;display:inline-block;font-weight:600;}
+.parcours-text .label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#1a1208;background:none;padding:0;border-radius:0;margin-bottom:8px;display:block;font-weight:700;}
 .parcours-text .quote-block{font-style:italic;color:rgba(255,255,255,0.7);margin:16px 0;padding-left:16px;border-left:2px solid rgba(255,255,255,0.2);}
 .parcours-text .result{font-weight:500;color:rgba(255,255,255,0.95);margin:12px 0;}
 .parcours-text .stop{font-weight:700;color:#fff;font-size:16px;letter-spacing:0.15em;}
@@ -361,7 +362,7 @@ body.ed .add-photo{display:block}
       <span>Modifier</span>
     </div>
   </div>
-  <p class="hline e" contenteditable="false">Le chemin est plus important <em>que la destination.</em></p>
+  <p class="hline e" contenteditable="false">Le chemin est plus important <em style="color:#c0392b;font-style:normal;">que la destination.</em></p>
 
   <div class="chs">
     <div class="ch" id="ch-0" onclick="openPanel('p0')">
