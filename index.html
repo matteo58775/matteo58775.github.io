@@ -210,6 +210,17 @@ body.ed .add-photo{display:block}
 .main-text{max-width:620px;margin:48px auto 0;text-align:left;font-family:'DM Sans',sans-serif;font-weight:400;font-size:18px;line-height:1.85;color:rgba(255,255,255,0.82);padding:0 20px}
 .main-text p{margin-bottom:20px}
 .main-text .quote{font-style:italic;font-size:21px;color:rgba(255,255,255,0.95);margin:28px 0}
+.parcours-text{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.88);max-width:700px;margin:0 auto;padding:0 22px 48px;}
+.parcours-text h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#fff;margin:40px 0 12px;letter-spacing:0.02em;}
+.parcours-text .sep{border:none;border-top:1px solid rgba(255,255,255,0.12);margin:36px 0;}
+.parcours-text ul{list-style:none;padding:0;margin:10px 0;}
+.parcours-text ul li{padding:3px 0 3px 16px;position:relative;}
+.parcours-text ul li::before{content:'-';position:absolute;left:0;color:rgba(255,255,255,0.5);}
+.parcours-text .label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;display:block;}
+.parcours-text .quote-block{font-style:italic;color:rgba(255,255,255,0.7);margin:16px 0;padding-left:16px;border-left:2px solid rgba(255,255,255,0.2);}
+.parcours-text .result{font-weight:500;color:rgba(255,255,255,0.95);margin:12px 0;}
+.parcours-text .stop{font-weight:700;color:#fff;font-size:16px;letter-spacing:0.15em;}
+.parcours-text .doc{color:#e53935;font-weight:600;font-size:15px;margin-top:40px;text-align:center;}
 </style>
 </head>
 <body>
@@ -463,55 +474,195 @@ body.ed .add-photo{display:block}
       <span class="phdrtitle e" contenteditable="false">Parcours Entrepreneurial</span>
     </div>
     <div class="phero">
-      <span class="phlabel e" contenteditable="false">Rubrique 01</span>
-      <h2 class="phtitle e" contenteditable="false">Parcours<br><em>Entrepreneurial</em></h2>
-      <p class="phintro e" contenteditable="false">Quelques mots sur ta vision, ce qui t'a pousse a entreprendre.</p>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">Mon parcours</p>
-      <div class="tl" id="tl-0">
-        <div class="tli">
-          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
-          <span class="tli-date e" contenteditable="false">2020 - Debut</span>
-          <p class="tli-title e" contenteditable="false">Premier projet</p>
-          <p class="tli-body e" contenteditable="false">Decris ici ton premier projet, comment ca a commence, ce que tu en as appris.</p>
-        </div>
-        <div class="tli">
-          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
-          <span class="tli-date e" contenteditable="false">2022 - Pivot</span>
-          <p class="tli-title e" contenteditable="false">Tournant important</p>
-          <p class="tli-body e" contenteditable="false">Ce qui s'est passe ensuite. Un tournant, une decision importante, une lecon cle.</p>
-        </div>
-        <div class="tli">
-          <button class="tli-del" onclick="delTli(this)">&#x2715;</button>
-          <span class="tli-date e" contenteditable="false">Aujourd'hui</span>
-          <p class="tli-title e" contenteditable="false">Ou j'en suis</p>
-          <p class="tli-body e" contenteditable="false">Ta situation actuelle, tes projets en cours.</p>
-        </div>
-      </div>
-      <div class="add-tli"><button onclick="addTli('tl-0')">+ Ajouter une etape</button></div>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">Ma vision</p>
-      <div class="rt">
-        <p class="e" contenteditable="false">Ecris librement sur ta philosophie business. <strong>Ce qui te differencie.</strong></p>
-        <p class="e" contenteditable="false">Un deuxieme paragraphe. Tes valeurs, ta methode, ce que tu as appris.</p>
-      </div>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">En chiffres</p>
-      <div class="pstats" id="st-0">
-        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Projets lances</span></div>
-        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Annees d'experience</span></div>
-        <div class="pst"><button class="pst-del" onclick="delStat(this)">&#x2715;</button><span class="psn e" contenteditable="false">0</span><span class="psl e" contenteditable="false">Personnes aidees</span></div>
-      </div>
-      <div class="add-stat"><button onclick="addStat('st-0')">+ Ajouter un chiffre</button></div>
-    </div>
-    <div class="psec">
-      <p class="pslabel e" contenteditable="false">En images</p>
-      <div class="pgal" id="pg-0"></div>
-      <div class="add-photo"><button onclick="addPhoto('pg-0')">+ Ajouter une photo</button></div>
-    </div>
+  <span class="phlabel e" contenteditable="false">Rubrique 01</span>
+  <h2 class="phtitle e" contenteditable="false">Parcours<br><em>Entrepreneurial</em></h2>
+  <p class="phintro e" contenteditable="false">Des années de tentatives, d'échecs assumés et de leçons apprises.<br>Voilà ce que personne ne montre sur internet.</p>
+</div>
+<div class="parcours-text">
+
+  <h3>2019-2020 — L'éveil</h3>
+  <p>Dès mes premiers stages de collège, j'ai compris que quelque chose n'allait pas.<br>
+  Peut-être dû à une mauvaise première expérience ? Oui et NON.</p>
+  <p>L'univers d'un système programmé de A à Z à suivre le même train de vie que tout le monde de manière limitée.</p>
+  <ul>
+    <li>Même vie,</li>
+    <li>même type de problème,</li>
+    <li>même routine,</li>
+    <li>même limite,</li>
+    <li>se contenter des weekends pour "profiter",</li>
+    <li>se lever le matin sans réelles ambitions,</li>
+    <li>blâmer sa vie et aimer celle des autres sur internet,</li>
+    <li>être dans la "sécurité" et ne jamais rien faire de ses 10 doigts,</li>
+    <li>faire les choses sans savoir pourquoi on les fait.. Juste.. On se tait et on fait.</li>
+  </ul>
+  <p class="quote-block">"Bienvenu dans le monde des adultes."</p>
+
+  <hr class="sep"/>
+
+  <h3>2021-2022 — Premier pas : l'e-commerce</h3>
+  <p>Un an d'études et des milliers d'euros en formations.</p>
+  <p><span class="label">Conclusion</span>
+  Ayant choisi la première chose tombée sous le nez, l'e-commerce.<br>
+  Ce n'est pas ce qui me correspond, et c'est bien plus complexe que ce qu'on voit sur internet.</p>
+
+  <hr class="sep"/>
+
+  <h3>2022-2023 — Le trading</h3>
+  <p>L'idée de ne dépendre que des cours de prix et de la puissance des marchés boursiers m'accroche immédiatement.<br>
+  Nouveau business, nouvelle excitation = nouvelle vulnérabilité.</p>
+  <p>Des centaines d'euros en coaching, ce qui donnait l'impression d'avoir acheté un bouton avec écrit dessus "réussir sa vie".<br>
+  Un compte avec de l'argent ne pouvant pas se permettre de perdre.</p>
+  <p class="result">Résultat : blocage mental, je repoussais sans cesse le passage au réel.</p>
+
+  <hr class="sep"/>
+
+  <h3>2024 — L'affiliation</h3>
+  <p>Je comprends comment fonctionnent certains influenceurs : affiliation, lifestyle fabriqué, vulnérabilité, psychologie de masse.<br>
+  Ayant une bonne base sur les réseaux,<br>
+  Étant désespéré,<br>
+  Apercevoir des plus jeunes x1000 plus c0n que moi mais pourtant x1000 plus riche sur internet.. Je tente.</p>
+  <ul>
+    <li>Canaux Telegram montés,</li>
+    <li>contrats signés,</li>
+    <li>vidéos postées chaque jour.</li>
+  </ul>
+  <p><span class="label">La recette "magique"</span>
+  La rapidité, l'ambiance, l'émotion, la "simplicité", la "maîtrise" de ce que je fais, en y laissant un sentiment d'opportunités.</p>
+  <p>Premiers milliers d'euros gagnés, réinvestis dans du matériel.</p>
+  <p><span class="label">La réalité rattrape</span>
+  Sans lifestyle crédible, plus personne ne passe à l'action.</p>
+  <p>Suite à des calls j'apprends que 98% des "traders" (influ-voleurs) se font payer leur lifestyle par certains brokers profitant des pertes de clients pour leur part du gâteau.<br>
+  Plus le lifestyle est gros, plus ça attire.</p>
+  <p>Plus d'énergie ni d'argent, je tente une dernière carte.</p>
+  <p><span class="label">Étape 1 : produire une formation</span>
+  Une formation scriptée en 1 semaine, tournée et montée en 48h sans interruption jour et nuit.</p>
+  <p><span class="label">Étape 2 : rentrer dans le cerveau des gens</span></p>
+  <ul>
+    <li>90% des gens sont captivés non pas par le trading mais par le lifestyle qu'ils voient.</li>
+    <li>Ceux qui essaient échouent car ils veulent aller le plus vite possible.</li>
+    <li>Comme le poison des réseaux sociaux, le cerveau a besoin d'accomplissement rapide.</li>
+  </ul>
+  <p><span class="label">Ce qui donne</span></p>
+  <ul>
+    <li>Chaque acheteur de la formation recevra un diplôme "officiel" de certification de trading.</li>
+    <li>Imprimer une dizaine de faux diplômes avec faux nom encadrés.</li>
+    <li>Prise de photo + mention via des comptes anonymes.</li>
+    <li>Jouer sur le sentiment d'urgence et de premium.</li>
+  </ul>
+  <p><span class="label">Résultat</span>
+  De nombreux intéressés, de nombreux hésitants, mais sans lifestyle et autre preuve dans ce milieu déjà saturé..<br>
+  <strong>0 vente.</strong></p>
+  <p>Plus d'énergies, plus de temps, plus d'argent.<br>
+  Une année entière à forcer dans le faux.</p>
+  <p>J'ai senti le burnout arriver. J'ai tout arrêté.<br>
+  Mon cerveau a su dire stop au dernier moment où j'étais devenu un zombie qui pourrissait jour &amp; nuit au bureau à tout exploser sous ses mains à chaque dérive.</p>
+
+  <hr class="sep"/>
+
+  <h3>Fin 2024 — OFM IA</h3>
+  <p>Dépité, je tombe directement dans la tendance OFM IA.<br>
+  Toujours dans l'euphorie, j'ai enchaîné.<br>
+  Comptes, scripts, contenu PPV, centaine d'euros dans une formation pitoyable.</p>
+  <p><span class="label">Résultat</span></p>
+  <ul>
+    <li>2 semaines à parler s€X* jour &amp; nuit à des pervers me faisant passer pour une jeune de 18 ans.</li>
+    <li>2 semaines à exploiter la dangerosité d'internet.</li>
+    <li>2 semaines à faire 0 ventes au prix de ma santé mentale et au risque d'avoir de gros problèmes.</li>
+  </ul>
+  <p class="stop">STOP.</p>
+
+  <hr class="sep"/>
+
+  <h3>2025 — La création de contenu</h3>
+  <p>Depuis des années je faisais des vidéos par passion.<br>
+  Une communauté existait déjà, alors pourquoi ne pas y mettre toute cette énergie ?</p>
+  <p>Des centaines de milliers de vues par semaine et des millions par mois sur TikTok.<br>
+  Lancement YouTube : <strong>100 000 abonnés en 7 mois.</strong><br>
+  Monétisation active.</p>
+  <p><span class="label">Résultat</span>
+  Des milliers d'euros chaque mois, puis la plupart réinvestis dans du matériel.</p>
+  <p><span class="label">Juillet 2025</span>
+  Les stats se sont stabilisées.<br>
+  L'humour est devenu "non niché", le RPM a dégringolé pour des milliers de créateurs.</p>
+  <p><span class="label">Conclusion</span>
+  La passion est là.<br>
+  La stabilité financière, pas encore.</p>
+
+  <hr class="sep"/>
+
+  <h3>2025 — Startup</h3>
+  <p>Une idée révolutionnaire naît :<br>
+  Un réseau social nouvelle génération mettant en avant l'ego, la reconnaissance sociale et la compétition via des votes hebdomadaires.<br>
+  <em>**** autres détails confidentiels ****</em></p>
+  <p>Ce n'est pas juste une simple idée mais le reflet de la génération numérique d'aujourd'hui.</p>
+  <p>Pendant de nombreux mois j'ai monté :</p>
+  <ul>
+    <li>Module technique complet,</li>
+    <li>Maquette interactive,</li>
+    <li>Des milliers d'heures de travail acharné.</li>
+  </ul>
+  <p>Le concept est puissant mais manque de contacts, faute de démarchage + le temps et l'argent que je n'ai pas = je fonce la tête dans le mur.</p>
+  <p>Le concept est "gelé" depuis.</p>
+
+  <hr class="sep"/>
+
+  <p>D'autres idées de projets étudiés en parallèle de ces dernières années :</p>
+  <ul>
+    <li>Achat revente automobile.</li>
+    <li>Prestation de service.</li>
+    <li>Et l'immobilier, une valeur sûre pour l'avenir mais inatteignable pour le moment.</li>
+  </ul>
+
+  <hr class="sep"/>
+
+  <h3>Fin 2025 — L'influence</h3>
+  <p>L'un de mes plus gros atouts : discipline / MindSet / sport.<br>
+  De quoi tenter des collaborations &amp; partenariats.</p>
+  <p>Je tente et le constat est vite fait :</p>
+  <ul>
+    <li>Prospection de marques sans retour solide.</li>
+    <li>Une image de marque que je ne peux pas faire naître du jour au lendemain et encore moins par intérêts.</li>
+  </ul>
+
+  <hr class="sep"/>
+
+  <p>Épuisé, frustré, des galères personnelles inimaginables.<br>
+  Un milliard d'excuses pour tout abandonner, mais 1 raison faisait que j'étais toujours debout.</p>
+  <p>Et c'est quand j'ai été au plus profond et éloigné de ce que je voulais vraiment qu'une chose a commencé.<br>
+  Un déclenchement ultime de conscience, de maturité, de responsabilité.</p>
+  <p>Si aujourd'hui je n'ai plus d'objectifs, je n'ai plus aucune raison de me lever chaque matin.<br>
+  Rien n'arrive par hasard.<br>
+  Rien ne naît de rien.<br>
+  Tout se provoque.</p>
+  <p>Chaque chose du présent est le résultat de faits et gestes du passé.<br>
+  La vie est un labyrinthe spirituel constant de milliards de chemins uniques, là où j'ai appris que le chemin était tout autant important que la destination.</p>
+  <p>Si un film est beau, ce n'est pas parce qu'il dure éternellement, mais parce qu'il fait ressentir quelque chose pendant qu'il existe.<br>
+  Honorer le passé, laisser sa trace au présent, s'épanouir en faisant ce qui nous semble être le mieux.</p>
+  <p>Et c'est ça qui fait la différence entre moi et les autres.</p>
+  <p>Où chaque problème a sa solution.<br>
+  Faire les choses même quand on n'en a pas envie.<br>
+  N'importe quel jour, n'importe quelle heure — "Avancer".</p>
+
+  <hr class="sep"/>
+
+  <h3>2026 — La dernière danse</h3>
+  <p>Après des années d'expériences, j'ai compris que plus une chose était connue sur internet, plus elle est saturée.</p>
+  <p>Un seul univers que j'ai continué à regarder de près en parallèle de ces dernières années.<br>
+  L'arène la plus brutale et la plus fascinante que l'humanité ait jamais construite.<br>
+  Un casino planétaire qui tourne 24h/24 où des milliards de dollars s'échangent chaque jour.<br>
+  Où la salle des marchés de The Big Short ou Wolf of Wall Street n'est pas que du cinéma.<br>
+  Où la puissance économique mondiale se concentre chaque jour sur ce qui nous concerne tous — l'argent.</p>
+  <p>Là où les chiffres ne mentent pas, j'ai choisi les mathématiques.</p>
+  <p><strong>Le trading quantitatif.</strong></p>
+  <p>Un énorme puzzle à résoudre, où je dois aller chercher chaque pièce et la placer au bon endroit dans le bon sens.<br>
+  Chaque analyse, exploitation, calcul, variante, simulation, croisement techniquement et fondamentalement basé sur des décennies de données historiques et bien d'autres encore.<br>
+  L'ère numérique et technologique est plus puissante que jamais.</p>
+
+  <hr class="sep"/>
+
+  <p class="doc">Un documentaire sera diffusé à l'avenir.</p>
+
+</div>
     <div class="pfooter"><p>&#169; 2025 &#8212; <strong>Matteo.czt</strong></p></div>
   </div>
 </div>
