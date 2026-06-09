@@ -228,6 +228,10 @@ body.ed .add-photo{display:block}
 .signature-block{display:flex;align-items:center;justify-content:center;gap:16px;margin:48px 0 0;padding:0 22px;}
 .signature-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;font-weight:400;color:#1a1208;}
 .signature-img{height:160px;width:auto;object-fit:contain;}
+.photo-grid-section{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:24px 0 8px;}
+.photo-grid-section img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;filter:saturate(0.85);}
+.photo-grid-section img:hover{filter:saturate(1);}
+@media(max-width:580px){.photo-grid-section{grid-template-columns:repeat(3,1fr);gap:5px;}}
 </style>
 </head>
 <body>
@@ -514,6 +518,12 @@ body.ed .add-photo{display:block}
   <p><span class="label">Conclusion</span>
   Ayant choisi la première chose tombée sous le nez, l'e-commerce.<br>
   Ce n'est pas ce qui me correspond, et c'est bien plus complexe que ce qu'on voit sur internet.</p>
+
+<div class="photo-grid-section">
+  <img src="./ecom1.jpg" alt="E-commerce 1"/>
+  <img src="./ecom2.jpg" alt="E-commerce 2"/>
+  <img src="./ecom3.jpg" alt="E-commerce 3"/>
+</div>
 
   <hr class="sep"/>
 
