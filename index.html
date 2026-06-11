@@ -363,9 +363,7 @@ body.ed .add-photo{display:block}
 <!-- PAGE PRINCIPALE -->
 <div id="page-wrap">
 <div class="hero">
-  <div class="av-out" id="av-out" onclick="clickAv()" style="position:relative;width:150px;height:150px;margin:0 auto 36px;">
-    <div style="position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle, rgba(138,109,78,0.18) 0%, rgba(107,78,53,0.22) 50%, transparent 75%);pointer-events:none;"></div>
-    <div style="position:absolute;inset:-10px;border-radius:50%;background:rgba(107,78,53,0.13);pointer-events:none;"></div>
+  <div class="av-out" id="av-out" onclick="clickAv()">
     <div class="av-ring"></div>
     <img class="av-img" id="av-disp" src="./avatar.jpg" alt="Matteo"/>
     <input type="file" id="av-in" accept="image/*" style="display:none" onchange="loadAv(this)"/>
@@ -474,7 +472,11 @@ body.ed .add-photo{display:block}
 <p class="doc" style="text-align:center;padding:0 22px 8px;">Un documentaire sera diffusé à l'avenir.</p>
 <div class="signature-block">
   <span class="signature-text">by matteo.c</span>
-  <img src="./signature.png" alt="Matteo" class="signature-img"/>
+  <div style="position:relative;display:inline-block;">
+    <div style="position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle, rgba(138,109,78,0.18) 0%, rgba(107,78,53,0.22) 50%, transparent 75%);pointer-events:none;"></div>
+    <div style="position:absolute;inset:-10px;border-radius:50%;background:rgba(107,78,53,0.13);pointer-events:none;"></div>
+    <img src="./signature.png" alt="Matteo" class="signature-img"/>
+  </div>
 </div>
 <div class="mfooter"><p>&#169; 2025 &#8212; <strong class="e" contenteditable="false">Matteo.czt</strong></p></div>
 </div>
